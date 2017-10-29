@@ -1,0 +1,6 @@
+*.pyc
+*.log
+*.jpg
+*.png
+*.gif
+*DS*Store
