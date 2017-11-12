@@ -25,7 +25,7 @@ SECRET_KEY = 'p*mti^oepk4*3bd(f%e-p)nj%izj28c+d5l^(p)=lh1y+6k^w2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['45c5e6d7.ngrok.io']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'destiny',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -7,9 +7,9 @@ from django.db import models
 class DestinyObject(models.Model):
     name = models.CharField(max_length = 50, verbose_name = "Название Обьекта")
     author = models.CharField(max_length = 50, verbose_name = "Автор")
-    info = models.TextField("text", blank = True, null = True)
+    # info = models.TextField("text", blank = True, null = True)
     object_type = models.ForeignKey("ObjectType", verbose_name="Тип обьекта", blank = True, null = True)
-    date = models.DateTimeField(verbose_name="Дата", blank=True, null=True)
+    date = models.CharField(max_length=50, verbose_name="Год", blank=True, null=True)
     place = models.ForeignKey("Place", verbose_name="Место нахождения", blank=True, null=True)
     class Meta:
         verbose_name = "Обьект культуруного достояния"
@@ -17,21 +17,22 @@ class DestinyObject(models.Model):
         # indexes = [ models.Index(fields=[ 'name' ]), models.Index(fields=[ 'is_hidden', 'member_count' ]) ]
         
     def __unicode__(self):
-        return self.name
+        return str(self.id) + " " + self.name
     
 
 class PhotoItem(models.Model):
     photo = models.ImageField(upload_to='photo/', blank=True, verbose_name="фото", null=True)
-    comment = models.CharField(max_length=50, verbose_name="Комментарий")
+    info = models.TextField("text", blank = True, null = True)
+    # comment = models.CharField(max_length=50, verbose_name="Комментарий", blank = True, null = True)
     photo_item = models.ForeignKey("DestinyObject", verbose_name="Карточки")
-    date = models.DateTimeField(verbose_name="Дата", blank=True, null=True)
+    date = models.CharField(max_length=50, verbose_name="Год", blank=True, null=True)
 
     class Meta:
         verbose_name = "Фотография"
         verbose_name_plural = "Фотографии"
 
     def __unicode__(self):
-        return self.photo_item.name + " " + self.id
+        return str(self.id) + " " + self.photo_item.name
 
 
 class ObjectType(models.Model):

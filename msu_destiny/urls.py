@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from destiny import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/?', admin.site.urls),
+    url(r'^item/(\d+)/?', views.photo_page),
+    url(r'^auth/?', views.auth_page),
+    url(r'^login/?', views.login),
+    url(r'^logout/?', views.logout),
+    url(r'^/', views.main_page),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
