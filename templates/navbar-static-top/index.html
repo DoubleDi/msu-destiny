@@ -20,6 +20,19 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+      <style type="text/css">
+       .block1 {
+           width: 600px;
+           height: 290px;
+           background-color: rgb(235,235,235);
+           margin-left: 44px;
+           padding: 15px;
+        /*padding: 5px;
+        padding-right: 20px;
+        border: solid 1px black;
+        float: left;*/
+       }
+      </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -71,7 +84,6 @@
 
 
     <div class="container">
-
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <!--<h1>Navbar example</h1>
@@ -82,18 +94,26 @@
         </p>-->
           <label class="control-label" for="inputAuthor">Автор</label>
           <form class="form-search">
-            <input type="text" class="input-medium search-query">
+            <input class="input-medium search-query" type="text" >
           </form>
           <label class="control-label" for="inputTitle">Название</label>
           <form class="form-search">
-            <input type="text" class="input-medium search-query">
+            <input type="text" class="input-large search-query">
           </form>
           <label class="control-label" for="inputFaculty">Факультет</label>
           <form class="form-search">
             <input type="text" class="input-medium search-query">
           </form>
+          <label class="control-label" for="inputType">Тип</label>
           <form class="form-search">
-                <button type="submit" class="btn">Search</button>
+            <input type="text" class="input-medium search-query">
+          </form>
+          <label class="control-label" for="inputYear">Год</label>
+          <form class="form-search">
+            <input type="text" class="input-medium search-query">
+          </form>
+          <form class="form-search">
+                <button type="submit" class="btn">Поиск</button>
           </form>
       </div>
 
@@ -101,22 +121,18 @@
 
 
 
-    <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="Жилинский/М.В.Ломоносов в своей лаборатории.jpg" width="255" height="255" class="img-polaroid">
-              <h4>М.В.Ломоносов в своей лаборатории</h4>
-              <span class="text-muted">Жилинский Д.</span>
-            </div>
-
-          </div>
-      </div>
-
+    <div class="block1">
+        <p><img src="Жилинский/М.В.Ломоносов в своей лаборатории.jpg" width="255" height="255" class="img-polaroid" align="left">
+        <p align="justify"><h4>М.В.Ломоносов в своей лаборатории</h4>
+        <span class="text-muted"> Жилинский Д.</span><br />
+        <a href="URL">Подробнее</a></p></p>
     </div>
-
+    <div class="block1">
+        <p><img src="Аксенов/П-т Л.Н.Толстого.jpg" width="255" height="255" class="img-polaroid" align="left">
+        <p align="justify"><h4>П-т Л.Н.Толстого</h4>
+        <span class="text-muted"> Аксенов К.Н.</span><br />
+        <a href="URL">Подробнее</a></p></p>
+    </div>
 
 
     <!-- Bootstrap core JavaScript
