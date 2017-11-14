@@ -25,7 +25,7 @@ SECRET_KEY = 'p*mti^oepk4*3bd(f%e-p)nj%izj28c+d5l^(p)=lh1y+6k^w2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['45c5e6d7.ngrok.io']
+ALLOWED_HOSTS = ['152807.simplecloud.ru', '85.143.174.33']
 
 
 # Application definition
@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'destiny',
         'USER': 'root',
-        # 'PASSWORD': '000000',
+        'PASSWORD': '0d066649-eac9-487a-b589-d0a7d5dec70f',
     }
 }
 
