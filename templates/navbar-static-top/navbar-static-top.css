@@ -14,3 +14,9 @@ body {
   /*border: solid 1px black;*/
   /*float: left;*/
 /*}*/
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
