@@ -41,8 +41,11 @@ def main_page(request):
         page = int(params.get('page', '1'))
         t = params.get('type', '')
         place = params.get('place', '')
+        
+        all = DestinyObject.objects.all()
+        count_all = len(all)
 
-        destiny_objects = DestinyObject.objects.all()[(
+        destiny_objects = all[(
             (page - 1) * PAGE_COUNT): ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1 + 1)]
 
         if len(destiny_objects) < PAGE_COUNT:
@@ -67,7 +70,8 @@ def main_page(request):
             'type': t, 
             'destiny_objects': destiny_objects,
             'types': types,
-            'faculties': faculties
+            'faculties': faculties,
+            'count': count_all
         })
 
 @login_required(login_url='/auth')
