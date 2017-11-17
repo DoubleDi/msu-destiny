@@ -1,0 +1,100 @@
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 14, 2017 - 13:51:43
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:15:09
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:15:11
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:15:19
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:15:27
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7f3b50eb26e0>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/autoreload.py", line 228, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/management/commands/runserver.py", line 125, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/management/base.py", line 405, in check
+    raise SystemCheckError(msg)
+django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+
+ERRORS:
+destiny.DestinyObject.author: (fields.E304) Reverse accessor for 'DestinyObject.author' clashes with reverse accessor for 'DestinyObject.place'.
+	HINT: Add or change a related_name argument to the definition for 'DestinyObject.author' or 'DestinyObject.place'.
+destiny.DestinyObject.place: (fields.E304) Reverse accessor for 'DestinyObject.place' clashes with reverse accessor for 'DestinyObject.author'.
+	HINT: Add or change a related_name argument to the definition for 'DestinyObject.place' or 'DestinyObject.author'.
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:15:54
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:16:00
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7f65eb8ab6e0>
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/autoreload.py", line 236, in wrapper
+    filename = traceback.extract_tb(tb)[-1][0]
+TypeError: 'NoneType' object is not callable
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:16:02
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:16:28
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 17, 2017 - 14:23:02
+Django version 1.11.7, using settings 'msu_destiny.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+?: (urls.W002) Your URL pattern '^/?' has a regex beginning with a '/'. Remove this slash as it is unnecessary. If this pattern is targeted in an include(), ensure the include() pattern has a trailing '/'.
+
+System check identified 1 issue (0 silenced).

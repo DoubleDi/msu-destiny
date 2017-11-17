@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 class DestinyObject(models.Model):
     name = models.CharField(max_length = 50, verbose_name = "Название Обьекта")
-    author = models.CharField(max_length = 50, verbose_name = "Автор")
+    author = models.ForeignKey("Author", verbose_name="Автор", blank=True, null=True)
     # info = models.TextField("text", blank = True, null = True)
     object_type = models.ForeignKey("ObjectType", verbose_name="Тип обьекта", blank = True, null = True)
     date = models.CharField(max_length=50, verbose_name="Год", blank=True, null=True)
@@ -51,6 +51,16 @@ class Place(models.Model):
     class Meta:
         verbose_name = "Место"
         verbose_name_plural = "Места"
+
+    def __unicode__(self):
+        return self.name
+
+class Author(models.Model):
+    name = models.CharField(max_length=50, verbose_name="ФИО автора")
+
+    class Meta:
+        verbose_name = "Автор"
+        verbose_name_plural = "Авторы"
 
     def __unicode__(self):
         return self.name

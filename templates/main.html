@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Static Top Navbar Example for Bootstrap</title>
+     {% load static %}
+    
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+    <script src="{% static "js/ie-emulation-modes-warning.js" %}"></script>
+
+  </head>
+
+  <body>
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Культурное достояние МГУ</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/">Поиск</a>
+        </li>
+        <li>
+          <a href="/logout">Выйти</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container">
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron row">
+        <h1 class="text-center" >Культурное достояние МГУ</h1>
+        <!--
+        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p> -->
+        <form class="form-search">
+          <div class="col-sm-6">
+            <label class="control-label" for="inputTitle">Название</label>
+            <input type="text" class="form-control search-query">
+            <label class="control-label" for="inputAuthor">Автор</label>
+            <input type="text" class="form-control search-query" type="text" >
+            <label class="control-label" for="inputYear">Год</label>
+            <input type="text" class="form-control search-query">
+          </div>
+          <div class="col-sm-6">
+            <label class="control-label" for="inputType">Тип</label>
+            <div class="btn-group btn-block">
+                <button type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown">Картина <span class="caret"></span></button>
+                <ul class="dropdown-menu scrollable-menu btn-block" role="menu">
+                    <li class="text-center"><a href="#">Картина</a></li>
+                    <li class="text-center"><a href="#">Скульптура</a></li>
+                </ul>
+            </div>
+            <!--<input type="text" class="form-control search-query"> -->
+            <label class="control-label" for="inputFaculty">Факультет</label>
+            <div class="btn-group btn-block">
+                <button type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown">Скульптура <span class="caret"></span></button>
+                <ul class="dropdown-menu scrollable-menu btn-block" role="menu">
+                    <li class="text-center"><a href="#">ФГУ</a></li>
+                    <li class="text-center"><a href="#">Библиотека</a></li>
+                    <li class="text-center"><a href="#">Поликлинника</a></li>
+                </ul>
+            </div>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-block">Поиск</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="jumbotron row">
+        <div class="col-sm-3">
+          <img src="Жилинский/М.В.Ломоносов в своей лаборатории.jpg" height="150" class="img-polaroid" align="left">
+        </div>
+        <div class="col-sm-8">
+          <h2 class="text-center">М.В.Ломоносов в своей лаборатории</h2>
+          <h4 class="text-muted text-center">Жилинский Д.</h4>
+          <h4 class="text-center"><a href="URL">Подробнее</a><h4>
+        </div>
+      </div>
+      <div class="jumbotron row">
+        <div class="col-sm-3">
+          <img src="Аксенов/П-т Л.Н.Толстого.jpg" height="150" class="img-polaroid" align="left">
+        </div>
+        <div class="col-sm-8">
+          <h2 class="text-center">П-т Л.Н.Толстого</h2>
+          <h4 class="text-muted text-center">Аксенов К.Н.</h4>
+          <h4 class="text-center"><a href="URL">Подробнее</a><h4>
+        </div>
+      </div>
+      <div class="row" style="width: 35%; margin: 0 auto">
+        <nav class="" aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="?page=1">Предыдущая страница</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page=2">Следующая страница</a>
+            </li>
+        </ul>
+      </nav>
+      </div>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+  </body>
+</html>
