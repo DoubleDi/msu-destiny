@@ -49,10 +49,10 @@
       <div class="blog-header">
         <h1 class="blog-title">{{ destiny.name }}</h1>
         <p class="lead blog-description">
-          {% if not destiny.author is None %} {{ destiny.author }}, {% endif %}
-          {% if not destiny.object_type.name is None %} {{ destiny.object_type.name }}, {% endif %}
-          {% if not destiny.date is None %} {{ destiny.date }}, {% endif %} 
-          {% if not destiny.place.name is None %} {{ destiny.place.name }} {% endif %}
+          {% if destiny.author %} {{ destiny.author.name }}, {% endif %}
+          {% if destiny.object_type.name %} {{ destiny.object_type.name }}, {% endif %}
+          {% if destiny.date %} {{ destiny.date }}, {% endif %} 
+          {% if destiny.place.name %} {{ destiny.place.name }} {% endif %}
         </p>
       </div>
 
@@ -77,9 +77,9 @@
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
-            {% if not destiny.author is None %} <h5><strong>Автор: </strong>{{ destiny.author }}</h5> {% endif %}
-            {% if not destiny.object_type.name is None %}<h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5> {% endif %}
-            {% if not destiny.date is None %} <h5><strong>Год: </strong>{{ destiny.date }}</h5> {% endif %}
+            {% if destiny.author %} <h5><strong>Автор: </strong>{{ destiny.author.name }}</h5> {% endif %}
+            {% if destiny.object_type.name %}<h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5> {% endif %}
+            {% if destiny.date %} <h5><strong>Год: </strong>{{ destiny.date }}</h5> {% endif %}
           </div>
         </div><!-- /.blog-sidebar -->
 

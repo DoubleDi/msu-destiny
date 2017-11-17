@@ -33,8 +33,42 @@ def auth_page(request):
 @login_required(login_url='/auth')
 def main_page(request):
     if request.method == 'GET':
-        params = {}
-        return render(request, 'main.html', params)
+        params = request.GET
+
+        PAGE_COUNT = 10
+        last_page = 0
+
+        page = int(params.get('page', '1'))
+        t = params.get('type', '')
+        place = params.get('place', '')
+
+        destiny_objects = DestinyObject.objects.all()[(
+            (page - 1) * PAGE_COUNT): ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1 + 1)]
+
+        if len(destiny_objects) < PAGE_COUNT:
+            last_page = 1
+            destiny_objects = list(destiny_objects)
+        else:
+            destiny_objects.pop()
+
+        for destiny in destiny_objects:
+            pictures = PhotoItem.objects.filter(photo_item = destiny)
+            if len(pictures):
+                destiny.picture = pictures[0]
+        
+        types = ObjectType.objects.all()
+        faculties = Place.objects.all()
+
+        return render(request, 'main.html', { 
+            'page': page, 
+            'first_page': page == 1,
+            'last_page': last_page,
+            'place': place, 
+            'type': t, 
+            'destiny_objects': destiny_objects,
+            'types': types,
+            'faculties': faculties
+        })
 
 @login_required(login_url='/auth')
 def photo_page(request, id):
@@ -42,7 +76,7 @@ def photo_page(request, id):
         params = {}
         try:
             destiny = DestinyObject.objects.get(id=id)
-        except Exception, e:
+        except Exception as e:
             raise Http404("Пользователя не существует")
         
         photo = PhotoItem.objects.filter(photo_item = destiny)
@@ -62,7 +96,7 @@ def login(request):
 
         try:
             user = User.objects.get(username = login_info['email'])
-        except Exception, e:
+        except Exception as e:
             return render(request, 'auth.html', {'message': 'Пользователя с таким email не сущетсвует'})
 
         user = auth.authenticate(username = login_info['email'], password = login_info['password'])
