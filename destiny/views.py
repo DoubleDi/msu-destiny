@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from destiny.models import DestinyObject, PhotoItem, ObjectType, Place
+from destiny.models import DestinyObject, PhotoItem, ObjectType, Place, Author
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth

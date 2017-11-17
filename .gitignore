@@ -5,5 +5,5 @@
 *.gif
 *DS*Store
 .idea/*
-hohup.out
+nohup.out
 destiny/migrations/*
