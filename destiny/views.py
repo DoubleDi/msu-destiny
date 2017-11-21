@@ -25,8 +25,8 @@ def auth_page(request):
     if request.method == 'GET':
         params = {}
         if request.user.is_authenticated():
-            # return HttpResponseRedirect('/')
-            return render(request, 'auth.html', params)
+            return HttpResponseRedirect('/')
+            # return render(request, 'auth.html', params)
         else:
             return render(request, 'auth.html', params)
 
@@ -35,14 +35,34 @@ def main_page(request):
     if request.method == 'GET':
         params = request.GET
 
+        logger.info('PARAMS', params)
+
+        input_params = {
+            'name': params.get('name', ''),
+            'author': params.get('author', ''),
+            'year': params.get('year', ''),
+            'place': params.get('place', ''),
+            'type': params.get('type', '')
+        }
+        
         PAGE_COUNT = 10
         last_page = 0
 
         page = int(params.get('page', '1'))
-        t = params.get('type', '')
-        place = params.get('place', '')
-        
-        all = DestinyObject.objects.all()
+        query = Q()
+
+        if (input_params['name']):
+            query &= Q(name__icontains = input_params['name'].lower())
+        if (input_params['author']):
+            query &= Q(author__name__icontains = input_params['author'].lower())
+        if (input_params['year']):
+            query &= Q(date__icontains = input_params['year'].lower())
+        if (input_params['place']):
+            query &= Q(place__name__icontains=input_params['place'].lower())
+        if (input_params['type']):
+            query &= Q(object_type__name__icontains=input_params['type'].lower())
+
+        all = DestinyObject.objects.filter(query)
         count_all = len(all)
 
         destiny_objects = all[(
@@ -66,12 +86,11 @@ def main_page(request):
             'page': page, 
             'first_page': page == 1,
             'last_page': last_page,
-            'place': place, 
-            'type': t, 
             'destiny_objects': destiny_objects,
             'types': types,
             'faculties': faculties,
-            'count': count_all
+            'count': count_all,
+            'placeholders': input_params,
         })
 
 @login_required(login_url='/auth')

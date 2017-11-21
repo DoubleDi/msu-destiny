@@ -62,35 +62,48 @@
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
         </p> -->
         <form class="form-search">
+          {% csrf_token %}
           <div class="col-sm-6">
             <label class="control-label" for="inputTitle">Название</label>
-            <input type="text" class="form-control search-query">
+            <input type="text" name="name" value="{{ placeholders.name }}" class="form-control search-query">
             <label class="control-label" for="inputAuthor">Автор</label>
-            <input type="text" class="form-control search-query" type="text" >
+            <input type="text" name="author" value="{{ placeholders.author }}" placeholder="{{ placeholders.author }}" class="form-control search-query" type="text" >
             <label class="control-label" for="inputYear">Год</label>
-            <input type="text" class="form-control search-query">
+            <input type="text" name="year" value="{{ placeholders.year }}" placeholder="{{ placeholders.year }}" class="form-control search-query">
           </div>
           <div class="col-sm-6">
             <label class="control-label" for="inputType">Тип</label>
-            <div class="btn-group btn-block">
-                <button type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown">{{ type|default:"Тип" }} <span class="caret"></span></button>
-                <ul class="dropdown-menu scrollable-menu btn-block" role="menu">
-                {% for t in types %}
-                <li class="text-center"><a href="&type={{ t.name }}">{{ t.name }}</a></li>
-                {% endfor %}
-              </ul>
-            </div>
+            <select name="type" class="form-control btn dropdown-toggle btn-block">
+              {% if placeholders.type %}
+              <option value="">Любой</option>
+              {% else %}
+              <option selected="selected" value="">Любой</option>
+              {% endif %}
+              {% for t in types %}
+              {% if t.name == placeholders.type %}
+              <option selected="selected" value="{{ t.name }}">{{ t.name }}</option>
+              {% else %}
+              <option value="{{ t.name }}">{{ t.name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+            
             <!--<input type="text" class="form-control search-query"> -->
             <label class="control-label" for="inputFaculty">Факультет</label>
-            <div class="btn-group btn-block">
-              <button type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown">{{ faculty|default:"Факультет" }} <span class="caret"></span></button>
-              <ul class="dropdown-menu scrollable-menu btn-block" role="menu">
-                  {% for f in faculties %}
-                    <li class="text-center"><a href="&place={{ f.name }}">{{ f.name }}</a></li>
-                  {% endfor %}
-                </ul>
-            </div>
-            <br>
+            <select name="place" class="form-control btn dropdown-toggle btn-block">
+              {% if placeholders.place %}
+              <option value="">Любой</option>
+              {% else %}
+              <option selected="selected" value="">Любой</option>
+              {% endif %}
+              {% for f in faculties %}
+              {% if f.name == placeholders.place %}
+              <option selected="selected" value="{{ f.name }}">{{ f.name }}</option>
+              {% else %}
+              <option value="{{ f.name }}">{{ f.name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
             <br>
             <button type="submit" class="btn btn-block">Поиск</button>
           </div>
