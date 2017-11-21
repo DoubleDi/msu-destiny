@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Static Top Navbar Example for Bootstrap</title>
+    <title>Культурное достояние МГУ</title>
      {% load static %}
     
     <link href="{% static "css/bootstrap.min.main.css" %}" rel="stylesheet">
@@ -103,6 +103,25 @@
               <option value="{{ f.name }}">{{ f.name }}</option>
               {% endif %}
               {% endfor %}
+            </select>
+
+            <label class="control-label" for="inputFaculty">Сортировка</label>
+            <select name="sort" class="form-control btn dropdown-toggle btn-block">
+              {% if placeholders.sort %}
+              <option value="">Нет</option>
+              {% else %}
+              <option selected="selected" value="">Нет</option>
+              {% endif %}
+              {% if placeholders.sort == "asc" %}
+              <option selected="selected" value="asc">А-Я</option>
+              {% else %}
+              <option value="asc">А-Я</option>
+              {% endif %}
+              {% if placeholders.place == "desc" %}
+              <option selected="selected" value="desc">Я-А</option>
+              {% else %}
+              <option value="desc">Я-А</option>
+              {% endif %}
             </select>
             <br>
             <button type="submit" class="btn btn-block">Поиск</button>

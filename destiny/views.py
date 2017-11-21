@@ -42,7 +42,8 @@ def main_page(request):
             'author': params.get('author', ''),
             'year': params.get('year', ''),
             'place': params.get('place', ''),
-            'type': params.get('type', '')
+            'type': params.get('type', ''),
+            'sort': params.get('sort', '')
         }
         
         PAGE_COUNT = 10
@@ -63,6 +64,10 @@ def main_page(request):
             query &= Q(object_type__name__icontains=input_params['type'].lower())
 
         all = DestinyObject.objects.filter(query)
+        if input_params['sort'] == 'asc':
+            all = all.order_by('name')
+        if input_params['sort'] == 'desc':
+            all = all.order_by('-name')
         count_all = len(all)
 
         destiny_objects = all[(
