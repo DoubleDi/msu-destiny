@@ -4,4 +4,6 @@
 *.png
 *.gif
 *DS*Store
+.idea/*
+nohup.out
 destiny/migrations/*

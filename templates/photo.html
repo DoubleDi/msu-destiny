@@ -28,7 +28,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">MSU Destiny</a>
+        <a class="navbar-brand" href="/">Культурное достояние МГУ</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -48,7 +48,11 @@
     <div class="container">
       <div class="blog-header">
         <h1 class="blog-title">{{ destiny.name }}</h1>
-        <p class="lead blog-description">{{ destiny.author }}, {{ destiny.object_type.name }}, {{ destiny.date }}, {{ destiny.place.name }}
+        <p class="lead blog-description">
+          {% if destiny.author %} {{ destiny.author.name }}, {% endif %}
+          {% if destiny.object_type.name %} {{ destiny.object_type.name }}, {% endif %}
+          {% if destiny.date %} {{ destiny.date }}, {% endif %} 
+          {% if destiny.place.name %} {{ destiny.place.name }} {% endif %}
         </p>
       </div>
 
@@ -63,6 +67,8 @@
             <blockquote>
               <p>
                 {{ p.text|safe }}
+                <br>
+                {% if p.date %} Дата изменения: {{ p.date }} {% endif %}
               </p>
             </blockquote>
           </div><!-- /.blog-post -->
@@ -71,9 +77,9 @@
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
-            <h5><strong>Автор: </strong>{{ destiny.author }}</h5>
-            <h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5>
-            <h5><strong>Год: </strong>{{ destiny.date }}</h5>
+            {% if destiny.author %} <h5><strong>Автор: </strong>{{ destiny.author.name }}</h5> {% endif %}
+            {% if destiny.object_type.name %}<h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5> {% endif %}
+            {% if destiny.date %} <h5><strong>Год: </strong>{{ destiny.date }}</h5> {% endif %}
           </div>
         </div><!-- /.blog-sidebar -->
 

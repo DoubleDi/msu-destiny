@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Static Top Navbar Example for Bootstrap</title>
+     {% load static %}
+    
+    <link href="{% static "css/bootstrap.min.main.css" %}" rel="stylesheet">
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+    <script src="{% static "js/ie-emulation-modes-warning.js" %}"></script>
+
+  </head>
+
+  <body>
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Культурное достояние МГУ</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/">Поиск</a>
+        </li>
+        <li>
+          <a href="/logout">Выйти</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container">
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron row">
+        <h1 class="text-center" >Культурное достояние МГУ</h1>
+        <p class="text-center">
+          Найдено {{ count }} обьектов культурного достояния
+        </p>
+        <!--
+        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p> -->
+        <form class="form-search">
+          {% csrf_token %}
+          <div class="col-sm-6">
+            <label class="control-label" for="inputTitle">Название</label>
+            <input type="text" name="name" value="{{ placeholders.name }}" class="form-control search-query">
+            <label class="control-label" for="inputAuthor">Автор</label>
+            <input type="text" name="author" value="{{ placeholders.author }}" placeholder="{{ placeholders.author }}" class="form-control search-query" type="text" >
+            <label class="control-label" for="inputYear">Год</label>
+            <input type="text" name="year" value="{{ placeholders.year }}" placeholder="{{ placeholders.year }}" class="form-control search-query">
+          </div>
+          <div class="col-sm-6">
+            <label class="control-label" for="inputType">Тип</label>
+            <select name="type" class="form-control btn dropdown-toggle btn-block">
+              {% if placeholders.type %}
+              <option value="">Любой</option>
+              {% else %}
+              <option selected="selected" value="">Любой</option>
+              {% endif %}
+              {% for t in types %}
+              {% if t.name == placeholders.type %}
+              <option selected="selected" value="{{ t.name }}">{{ t.name }}</option>
+              {% else %}
+              <option value="{{ t.name }}">{{ t.name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+            
+            <!--<input type="text" class="form-control search-query"> -->
+            <label class="control-label" for="inputFaculty">Факультет</label>
+            <select name="place" class="form-control btn dropdown-toggle btn-block">
+              {% if placeholders.place %}
+              <option value="">Любой</option>
+              {% else %}
+              <option selected="selected" value="">Любой</option>
+              {% endif %}
+              {% for f in faculties %}
+              {% if f.name == placeholders.place %}
+              <option selected="selected" value="{{ f.name }}">{{ f.name }}</option>
+              {% else %}
+              <option value="{{ f.name }}">{{ f.name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+            <br>
+            <button type="submit" class="btn btn-block">Поиск</button>
+          </div>
+        </form>
+      </div>
+
+      {% for destiny in destiny_objects %}
+      <div class="jumbotron row">
+        <div class="col-sm-3">
+          <a href="/item/{{ destiny.id }}">
+            <img src="/media/{{ destiny.picture.photo }}" height="150" class="img-polaroid" align="left">
+          </a>
+        </div>
+        <div class="col-sm-8">
+          <h2 class="text-center">{{ destiny.name }}</h2>
+          <p class="text-muted text-center">
+            {% if destiny.author %} {{ destiny.author.name }}, {% endif %} 
+            {% if destiny.object_type.name %} {{ destiny.object_type.name }}, {% endif %} 
+            {% if destiny.date %} {{ destiny.date }}, {% endif %} 
+            {% if destiny.place.name %} {{ destiny.place.name }} {% endif %}
+          </p>
+          <h4 class="text-center"><a href="/item/{{ destiny.id }}">Подробнее</a><h4> 
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="row" style="width: 35%; margin: 0 auto">
+        <nav class="" aria-label="Page navigation example">
+          <ul class="pagination">
+            {% if not first_page %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page|add:"-1" }}">Предыдущая страница</a>
+            </li>
+            {% endif %}
+            {% if not last_page %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page|add:1 }}">Следующая страница</a>
+            </li>
+            {% endif %}
+        </ul>
+      </nav>
+      </div>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{% static "js/bootstrap.min.main.js" %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+  </body>
+</html>

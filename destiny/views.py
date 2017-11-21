@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from destiny.models import DestinyObject, PhotoItem, ObjectType, Place
+from destiny.models import DestinyObject, PhotoItem, ObjectType, Place, Author
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -25,16 +25,73 @@ def auth_page(request):
     if request.method == 'GET':
         params = {}
         if request.user.is_authenticated():
-            # return HttpResponseRedirect('/')
-            return render(request, 'auth.html', params)
+            return HttpResponseRedirect('/')
+            # return render(request, 'auth.html', params)
         else:
             return render(request, 'auth.html', params)
 
 @login_required(login_url='/auth')
 def main_page(request):
     if request.method == 'GET':
-        params = {}
-        return render(request, 'main.html', params)
+        params = request.GET
+
+        logger.info('PARAMS', params)
+
+        input_params = {
+            'name': params.get('name', ''),
+            'author': params.get('author', ''),
+            'year': params.get('year', ''),
+            'place': params.get('place', ''),
+            'type': params.get('type', '')
+        }
+        
+        PAGE_COUNT = 10
+        last_page = 0
+
+        page = int(params.get('page', '1'))
+        query = Q()
+
+        if (input_params['name']):
+            query &= Q(name__icontains = input_params['name'].lower())
+        if (input_params['author']):
+            query &= Q(author__name__icontains = input_params['author'].lower())
+        if (input_params['year']):
+            query &= Q(date__icontains = input_params['year'].lower())
+        if (input_params['place']):
+            query &= Q(place__name__icontains=input_params['place'].lower())
+        if (input_params['type']):
+            query &= Q(object_type__name__icontains=input_params['type'].lower())
+
+        all = DestinyObject.objects.filter(query)
+        count_all = len(all)
+
+        destiny_objects = all[(
+            (page - 1) * PAGE_COUNT): ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1 + 1)]
+
+        if len(destiny_objects) < PAGE_COUNT:
+            last_page = 1
+            destiny_objects = list(destiny_objects)
+        else:
+            destiny_objects.pop()
+
+        for destiny in destiny_objects:
+            pictures = PhotoItem.objects.filter(photo_item = destiny)
+            if len(pictures):
+                destiny.picture = pictures[0]
+        
+        types = ObjectType.objects.all()
+        faculties = Place.objects.all()
+
+        return render(request, 'main.html', { 
+            'page': page, 
+            'first_page': page == 1,
+            'last_page': last_page,
+            'destiny_objects': destiny_objects,
+            'types': types,
+            'faculties': faculties,
+            'count': count_all,
+            'placeholders': input_params,
+        })
 
 @login_required(login_url='/auth')
 def photo_page(request, id):
@@ -42,7 +99,7 @@ def photo_page(request, id):
         params = {}
         try:
             destiny = DestinyObject.objects.get(id=id)
-        except Exception, e:
+        except Exception as e:
             raise Http404("Пользователя не существует")
         
         photo = PhotoItem.objects.filter(photo_item = destiny)
@@ -62,7 +119,7 @@ def login(request):
 
         try:
             user = User.objects.get(username = login_info['email'])
-        except Exception, e:
+        except Exception as e:
             return render(request, 'auth.html', {'message': 'Пользователя с таким email не сущетсвует'})
 
         user = auth.authenticate(username = login_info['email'], password = login_info['password'])
