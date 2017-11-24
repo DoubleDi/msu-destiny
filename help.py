@@ -26,7 +26,7 @@ DestinyObject.objects.create(
     name = name, # Название картины
     author = Author.objects.get(name__contains = substr), # Автор - надо достать обьект автора из базы по имени 
      #"name__contains" проверяет на подстроку( чтобы точно найти). 
-     # Важно что get должен вернуть 1 обьект иначе он упадет исключением дял нескольких есть filter
+     # Важно что get должен вернуть 1 обьект иначе он упадет исключением для нескольких есть filter
     object_type = ObjectType.objects.get(name__contains = substr),
     date = date,
     place = Place.objects.get(name__contains = substr)
