@@ -38,6 +38,11 @@ class DestinyObjectAdmin(admin.ModelAdmin):
         'date', 
         'id'
     )
+    
+    # raw_id_fields = ("author", "place")
+
+
+
 class AuthorAdmin(admin.ModelAdmin):
     search_fields = ['name']
     list_display = (

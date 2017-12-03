@@ -17,6 +17,9 @@ for line in all:
         tmp = line[:line.find("\n")]
         if "\ufeff" in tmp:
             tmp = tmp[tmp.find("\ufeff") + 1:]
+        if "None" in tmp:
+            tmp = "Неизвестный автор"
+            # print(tmp)
         set_authors.add(tmp)
     count += 1
 authors = sorted(set_authors)

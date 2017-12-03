@@ -11,7 +11,7 @@ from django.db.models import Q, Prefetch
 from django.core import serializers
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from msu_destiny.settings import BASE_DIR, STATIC_ROOT
+from msu_destiny.settings import BASE_DIR, STATIC_ROOT, MEDIA_ROOT
 
 import urllib
 import logging
@@ -71,7 +71,7 @@ def main_page(request):
         count_all = len(all)
 
         destiny_objects = all[(
-            (page - 1) * PAGE_COUNT): ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1 + 1)]
+            (page - 1) * PAGE_COUNT) : ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1)]
 
         if len(destiny_objects) < PAGE_COUNT:
             last_page = 1
@@ -97,6 +97,17 @@ def main_page(request):
             'count': count_all,
             'placeholders': input_params,
         })
+
+
+@login_required(login_url='/auth')
+def serve_image(request, uri):
+    if not os.path.exists(os.path.join(MEDIA_ROOT, uri)):
+        raise Http404("Изображения не существует")
+        
+    with open(os.path.join(MEDIA_ROOT, uri)) as f:
+        content = f.read()
+        return HttpResponse(content, content_type="image/png")
+
 
 @login_required(login_url='/auth')
 def photo_page(request, id):

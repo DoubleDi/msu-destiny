@@ -26,30 +26,43 @@ def destiny(path):
         all = f.readlines()
     name = all[1][:-1]
     # author = Author.objects.first(name__contains = all[0][1:-1])
-    author = all[0][3:-1]
+    author1 = all[0][3:-1]
     # type = ObjectType.objects.get(name__contains = all[2][:-1])
     obj_type = all[2][:-1]
-    obj_type = obj_type[0].upper() + obj_type[1:]
+    # obj_type = obj_type[0].lower() + obj_type[1:]
     date = get_date(path)
     place = all[3][:-1]
     # place = Place.objects.get(name__contains = all[3][:-1])
-    print(obj_type)
+    # print(author)
+    # print(name)
+    # print(place)
+    # print(obj_type)
     # print(obj_type.find("Скульптурa") != -1)
-    if obj_type.find("Скульптурa") != -1:
-        n = 1
+    if obj_type[:4] in "Скульпутра":
+        object_type = ObjectType.objects.get(name__contains = "Скульптура")
     else:
-        n = 2
-    author = Author.objects.filter(name__contains=author)
+        object_type = ObjectType.objects.get(name__contains = "Картина")
+    # print(obj_type)
+    # print(object_type)
+    # print()
+
+    author = Author.objects.filter(name__contains=author1)
     if author:
         author = author[0]
-    else:
-        author = ''
+    # print(author)
+    # f_check.write(name + " " + place + " " + author1 + "\n")
+    # place = Place.objects.get(name__contains=place)
+    #
+    # print(place)
+    # else:
+    #     author = ''
+
     DestinyObject.objects.create(
         name=name,  # Название картины
         author=author,  # Автор - надо достать обьект автора из базы по имени
         # "name__contains" проверяет на подстроку( чтобы точно найти).
         # Важно что get должен вернуть 1 обьект иначе он упадет исключением для нескольких есть filter
-        object_type=ObjectType.objects.get(id = n),
+        object_type=object_type,
         date=date,
         place=Place.objects.get(name__contains=place)
     )
@@ -74,6 +87,9 @@ def get_date(path):
                         date = j
     return date
 
-base = "media/Военное дело_sorted/Культурное достояние МГУ"
+f_check = open("check.txt", "w")
+base = "media"
 dir = os.listdir(base)
 parse(dir, base)
+# DestinyObject.objects.all().delete()
+# ObjectType.objects.all().delete()

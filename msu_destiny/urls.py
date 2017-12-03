@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^media/(.+)?', views.serve_image),
     url(r'^admin/?', admin.site.urls),
     url(r'^item/(\d+)/?', views.photo_page),
     url(r'^auth/?', views.auth_page),

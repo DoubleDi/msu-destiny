@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ce8af81-68e5-47e4-98a5-f12de470c56d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Author.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Destiny.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Type.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/photo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fix.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.Destiny.py.swp" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/destiny/admin.py" afterPath="$PROJECT_DIR$/destiny/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/help.py" afterPath="$PROJECT_DIR$/help.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Author.py" afterPath="$PROJECT_DIR$/Author.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Destiny.py" afterPath="$PROJECT_DIR$/Destiny.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Type.py" afterPath="$PROJECT_DIR$/Type.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/destiny/views.py" afterPath="$PROJECT_DIR$/destiny/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/photo.py" afterPath="$PROJECT_DIR$/photo.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/main.html" afterPath="$PROJECT_DIR$/templates/main.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/photo.html" afterPath="$PROJECT_DIR$/templates/photo.html" />
     </list>
@@ -29,21 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manage.py">
+      <file leaf-file-name="Destiny.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Destiny.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="help.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/help.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="16" lean-forward="true" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state relative-caret-position="0">
+              <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="26" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -54,8 +44,8 @@
       <file leaf-file-name="photo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/photo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="1292">
+              <caret line="76" column="64" lean-forward="false" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="64" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -63,47 +53,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Destiny.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny.py">
+      <file leaf-file-name="destiny.conf" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/destiny.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="53" column="49" lean-forward="false" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
-              <folding>
-                <element signature="e#24#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Author.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Author.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
-              <folding>
-                <element signature="e#24#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Type.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Type.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fac.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fac.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/destiny/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+            <state relative-caret-position="153">
+              <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="8" />
               <folding>
-                <element signature="e#25#34#0" expanded="true" />
+                <element signature="e#24#63#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -128,7 +94,36 @@
       <find>navbar</find>
       <find>holder</find>
       <find>3-</find>
+      <find>non</find>
+      <find>None/Неизсветсный автор</find>
+      <find>столето</find>
+      <find>З.Азгур(руков-ть), А.Бембель, А. Глебов, С. Селихамов</find>
+      <find>З. Азгур(руководитель), А. Бембель, А. Глебов, С.</find>
+      <find>З.Азгур(руков-ть),А.Бембель,А.Глебов,С.Селихамов</find>
+      <find>З.Азгур(руков-ть),А.Бембель,А.Глебов,С.СелихамовСелиханов.</find>
+      <find>Феоклистов И.А.</find>
+      <find>Феоклистов</find>
+      <find>столетов</find>
+      <find>Весенний день</find>
+      <find>Портрет Сеченова</find>
+      <find>Аникушин</find>
+      <find>Неизвестный автор</find>
+      <find>Аникушин(Неизвестный автор)</find>
+      <find>Горы</find>
+      <find>Виотов (Неизвестный художник)</find>
+      <find>Виотов</find>
+      <find>Б-240.jpg</find>
+      <find>Неизвестная картина</find>
     </findStrings>
+    <replaceStrings>
+      <replace>Неизвестный автор</replace>
+      <replace>З.Азгур(руков-ть),А.Бембель,А.Глебов,С.Селихамов</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Факультет физического воспитания</dir>
+      <dir>$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ</dir>
+      <dir>$PROJECT_DIR$/media</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -142,11 +137,21 @@
         <option value="$PROJECT_DIR$/templates/navbar-static-top/navbar-static-top.css" />
         <option value="$PROJECT_DIR$/templates/navbar-static-top/index.html" />
         <option value="$PROJECT_DIR$/../../Новая папка/Cloud Mail.Ru/Военное дело_sorted/list.txt" />
-        <option value="$PROJECT_DIR$/Type.py" />
-        <option value="$PROJECT_DIR$/Author.py" />
         <option value="$PROJECT_DIR$/help.py" />
-        <option value="$PROJECT_DIR$/photo.py" />
+        <option value="$PROJECT_DIR$/fix.py" />
+        <option value="$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Библиотека/Сканы фотографий/Картины/Неизвестный художник/П-т Герцена_sorted.txt" />
+        <option value="$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Библиотека/Сканы фотографий/Картины/Неизвестный художник/П-т К.А.Тимирязева_sorted.txt" />
+        <option value="$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Библиотека/Сканы фотографий/Картины/Соколов/Зимний пейзаж Карелия_sorted.txt" />
+        <option value="$PROJECT_DIR$/Author.py" />
+        <option value="$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Физический факультет/Сканы фотографий/Скульптура/Азгур/Столетов.txt" />
+        <option value="$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Физический факультет/Сканы фотографий/Скульптура/Азгур/Столетов_sorted.txt" />
+        <option value="$PROJECT_DIR$/media/Военное дело_sorted/list.txt" />
+        <option value="$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Химический факультет/Скан фотографии/Скульптура/Азгур/Бутлеров.txt" />
+        <option value="$PROJECT_DIR$/fix.txt" />
+        <option value="$PROJECT_DIR$/Type.py" />
         <option value="$PROJECT_DIR$/Destiny.py" />
+        <option value="$PROJECT_DIR$/destiny/models.py" />
+        <option value="$PROJECT_DIR$/photo.py" />
       </list>
     </option>
   </component>
@@ -176,8 +181,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,23 +196,24 @@
             <path>
               <item name="mnt-test" type="b2602c69:ProjectViewProjectNode" />
               <item name="mnt-test" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mnt-test" type="b2602c69:ProjectViewProjectNode" />
               <item name="mnt-test" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="Военное дело_sorted" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/Военное дело_sorted" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
@@ -307,8 +311,8 @@
     </configuration>
     <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Django server.msu-destiny-python" />
-      <item index="1" class="java.lang.String" itemvalue="Python.manage" />
-      <item index="2" class="java.lang.String" itemvalue="Django server.mnt-test" />
+      <item index="1" class="java.lang.String" itemvalue="Django server.mnt-test" />
+      <item index="2" class="java.lang.String" itemvalue="Python.manage" />
       <item index="3" class="java.lang.String" itemvalue="Python.Author" />
     </list>
     <recent_temporary>
@@ -335,27 +339,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="50" width="1920" height="1030" extended-state="6" />
-    <editor active="true" />
+    <frame x="131" y="0" width="1920" height="1030" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.128125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.128125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -378,34 +381,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py" />
+    <entry file="file://$PROJECT_DIR$/manage.py" />
     <entry file="file://$PROJECT_DIR$/templates/navbar-static-top/navbar-static-top.css" />
     <entry file="file://$PROJECT_DIR$/templates/dashboard/index.html" />
     <entry file="file://$PROJECT_DIR$/templates/signin/index.html" />
     <entry file="file://$PROJECT_DIR$/templates/navbar-static-top/index.html" />
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py" />
     <entry file="file://$PROJECT_DIR$/templates/navbar-static-top/navbar-static-top.css" />
     <entry file="file://$PROJECT_DIR$/templates/navbar-static-top/index.html" />
     <entry file="file://$PROJECT_DIR$/templates/dashboard/index.html" />
@@ -422,44 +404,82 @@
     <entry file="file://$PROJECT_DIR$/templates/navbar-static-top/navbar-static-top.css" />
     <entry file="file://$PROJECT_DIR$/../../Новая папка/Cloud Mail.Ru/Военное дело_sorted/list.txt" />
     <entry file="file://$PROJECT_DIR$/templates/navbar-static-top/index.html" />
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Type.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/list.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-117472">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py" />
     <entry file="file://$PROJECT_DIR$/fac.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
           <folding>
-            <element signature="e#25#34#0" expanded="true" />
+            <element signature="e#25#34#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Физический факультет/Сканы фотографий/Картины/Домогадский/П-т Менделеева_sorted.txt" />
+    <entry file="file://$PROJECT_DIR$/fix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Библиотека/Сканы фотографий/Картины/Соколов/Зимний пейзаж Карелия_sorted.txt" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Библиотека/Сканы фотографий/Картины/Неизвестный художник/П-т К.А.Тимирязева_sorted.txt" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Библиотека/Сканы фотографий/Картины/Неизвестный художник/П-т Герцена_sorted.txt" />
     <entry file="file://$PROJECT_DIR$/Author.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+        <state relative-caret-position="442">
+          <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Физический факультет/Сканы фотографий/Скульптура/Азгур/Столетов.txt" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Физический факультет/Сканы фотографий/Скульптура/Азгур/Столетов_sorted.txt" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Химический факультет/Скан фотографии/Скульптура/Азгур/Бутлеров.txt" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/list.txt" />
+    <entry file="file://$PROJECT_DIR$/media/photo.py" />
+    <entry file="file://$PROJECT_DIR$/check.txt" />
+    <entry file="file://$PROJECT_DIR$/fix.txt" />
+    <entry file="file://$PROJECT_DIR$/Type.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="2" selection-end-line="15" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/destiny/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="8" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/destiny/migrations/0002_auto_20171117_1416.py" />
+    <entry file="file://$PROJECT_DIR$/destiny/migrations/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/test/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/help.py" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Дом культуры/сканы фотографий/скульптуры/Аникушин/Горький_sorted.txt" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Музей землеведения/Сканы фотографий/Скульптура/Аникушин/Бюст Смирнова_sorted.txt" />
+    <entry file="file://$PROJECT_DIR$/media/Военное дело_sorted/Культурное достояние МГУ/Биологический факультет/Скан фотографий/Картины/Виотов/П-т Ленина.txt" />
+    <entry file="file://$PROJECT_DIR$/Destiny.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="26" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
@@ -468,39 +488,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/photo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="1292">
+          <caret line="76" column="64" lean-forward="false" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="64" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny.py">
+    <entry file="file://$PROJECT_DIR$/templates/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="53" column="49" lean-forward="false" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/destiny/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="10" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="10" />
+        <state relative-caret-position="-2475">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/help.py">
+    <entry file="file://$PROJECT_DIR$/destiny.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="16" lean-forward="true" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

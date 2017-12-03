@@ -136,7 +136,7 @@
       <div class="jumbotron row">
         <div class="col-sm-3">
           <a href="/item/{{ destiny.id }}">
-            <img src="/media/{{ destiny.picture.photo }}" height="150" class="img-polaroid" align="left">
+            <img src="/media/{{ destiny.picture.photo }}" width="100%" class="img-polaroid" align="left">
           </a>
         </div>
         <div class="col-sm-8">
@@ -152,21 +152,29 @@
       </div>
       {% endfor %}
 
-      <div class="row" style="width: 35%; margin: 0 auto">
-        <nav class="" aria-label="Page navigation example">
+      <div class="row">
+        <div class="col-sm-7 col-sm-offset-5" aria-label="Page navigation example">
           <ul class="pagination">
             {% if not first_page %}
             <li class="page-item">
-              <a class="page-link" href="?page={{ page|add:"-1" }}">Предыдущая страница</a>
+            {% if request.get_full_path == request.path %}
+              <a class="page-link" href="{{ request.get_full_path }}?page={{ page|add:"-1" }}">Назад</a>
+            {% else %}
+              <a class="page-link" href="{{ request.get_full_path }}&page={{ page|add:"-1" }}">Назад</a>
+            {% endif %}
             </li>
             {% endif %}
             {% if not last_page %}
             <li class="page-item">
-              <a class="page-link" href="?page={{ page|add:1 }}">Следующая страница</a>
+              {% if request.get_full_path == request.path %}
+              <a class="page-link" href="{{ request.get_full_path }}?page={{ page|add:1 }}">Вперед</a>
+              {% else %}
+              <a class="page-link" href="{{ request.get_full_path }}&page={{ page|add:1 }}">Вперед</a>
+              {% endif %}
             </li>
             {% endif %}
         </ul>
-      </nav>
+      </div>
       </div>
     </div> <!-- /container -->
 
