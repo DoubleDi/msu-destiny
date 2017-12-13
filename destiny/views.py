@@ -43,7 +43,8 @@ def main_page(request):
             'year': params.get('year', ''),
             'place': params.get('place', ''),
             'type': params.get('type', ''),
-            'sort': params.get('sort', '')
+            'sort': params.get('sort', ''),
+            'extra': params.get('extra', '')
         }
         
         PAGE_COUNT = 10
@@ -62,13 +63,23 @@ def main_page(request):
             query &= Q(place__name__icontains=input_params['place'].lower())
         if (input_params['type']):
             query &= Q(object_type__name__icontains=input_params['type'].lower())
+        if (input_params['extra']):
+            photo_items = PhotoItem.objects.filter(info__icontains=input_params['extra'].lower())
+            destiny_ids = set(map(lambda x: x.photo_item.id, list(photo_items)))
+
+            query &= Q(id__in=destiny_ids)
 
         all = DestinyObject.objects.filter(query)
-        if input_params['sort'] == 'asc':
-            all = all.order_by('name')
         if input_params['sort'] == 'desc':
             all = all.order_by('-name')
+        else:
+            all = all.order_by('name')
+        
+        all = list(all)
+        
+
         count_all = len(all)
+        
 
         destiny_objects = all[(
             (page - 1) * PAGE_COUNT) : ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1)]
@@ -133,12 +144,15 @@ def login(request):
         if request.user.is_authenticated():
             auth.logout(request)
 
+        email = login_info['email'].lower().strip()
         try:
-            user = User.objects.get(username = login_info['email'])
+            query = Q()
+            query &= (Q(username__iexact=email) | Q(email__iexact=email))
+            user = User.objects.get(query)
         except Exception as e:
-            return render(request, 'auth.html', {'message': 'Пользователя с таким email не сущетсвует'})
+            return render(request, 'auth.html', {'message': 'Пользователя с таким email или логином не сущетсвует'})
 
-        user = auth.authenticate(username = login_info['email'], password = login_info['password'])
+        user = auth.authenticate(username = user.username, password = login_info['password'])
         if user is None:
             return render(request, 'auth.html', {'message': 'Неверный пароль'})
 

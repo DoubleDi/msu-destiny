@@ -46,11 +46,11 @@ class ObjectType(models.Model):
         return self.name
 
 class Place(models.Model):
-    name = models.CharField(max_length=50, verbose_name="Название места")
+    name = models.CharField(max_length=50, verbose_name="Название подразделения")
 
     class Meta:
-        verbose_name = "Место"
-        verbose_name_plural = "Места"
+        verbose_name = "Подразделение"
+        verbose_name_plural = "Подразделения"
 
     def __unicode__(self):
         return self.name
