@@ -62,75 +62,58 @@
       <div class="row">
 
         <div class="col-sm-7 blog-main">
-          {% for p in photo %}
-          <div class="blog-post">
-            <img src="/media/{{ p.photo }}" width="100%" class="img-polaroid">
-            {% if p.date or edit %}
-            <blockquote>
-              {% if p.date %}
-              <p>
-                Дата изменения: {{ p.date }}
-              </p>
-              {% endif %}
-              {% if edit %}
-              <p>
-                <form action="/item/{{ destiny.id }}/delete_photo/{{ p.id }}" method="post">
-                  {% csrf_token %}
-                  <input type="submit" class="btn btn-danger" value="Удалить" />
-                </form>
-              </p>
-              {% endif %}
-            </blockquote>
-            {% endif %}
-          </div><!-- /.blog-post -->
-          {% endfor %}
-          {% if edit %}
-          <div class="row">
             <form action="/item/{{ destiny.id }}/add_photo" method="post" enctype="multipart/form-data">
               {% csrf_token %}
-              <div class="col-sm-8">
+              <div>
                 <input type="file" class="form-control" id="images" name="images" multiple/>
               </div>
-              <div class="col-sm-3">
-                <input type="submit" class="btn btn-success" name='submit_image' value="Загрузить фотографии" />
+              
+              <div>
+                <label class="control-label" for="inputTitle">Название</label>
+                <input type="text" name="name" class="form-control search-query">
               </div>
+              
+              <div>
+              <label class="control-label" for="inputType">Автор</label>
+              <select name="author" class="form-control btn dropdown-toggle btn-block">
+              {% for a in authors %} 
+              <option value="{{ a.name }}">{{ a.name }}</option>
+              {% endfor %}
+              </select>
+              </div>
+                
+              <div>
+                <label class="control-label" for="inputType">Информация</label>
+                <textarea class="form-control search-query" rows="10" name="text" id="text">{{ destiny.info }}</textarea>
+              </div>
+
+              <div>
+                <label class="control-label" for="inputType">Тип</label>
+                <select name="type" class="form-control btn dropdown-toggle btn-block">
+                  {% for t in types %}
+                  <option value="{{ t.name }}">{{ t.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div>
+                <label class="control-label" for="inputTitle">Год</label>
+                <input type="text" name="year" class="form-control search-query">
+              </div>
+
+              <div>
+                <label class="control-label" for="inputType">Место</label>
+                <select name="place" class="form-control btn dropdown-toggle btn-block">
+                  {% for p in places %}
+                  <option value="{{ p.name }}">{{ p.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <br>
+              <input type="submit" class="btn btn-default" name='submit_text' value="Сохранить" />
             </form>
-          </div>
-          {% endif %}
-          <br>
-          <form action="/item/{{ destiny.id }}/edit" method="post">
-          {% csrf_token %}
-          <blockquote>
-            <p>
-              {% if edit %}
-              <textarea class="form-control" rows="10" name="text" id="text">{{ destiny.info }}</textarea>
-              {% else %}
-              {{ destiny.text|safe }}
-              {% endif %}
-            </p>
-          </blockquote>
-          {% if edit %}
-          <input type="submit" class="btn btn-success" name='submit_text' value="Сохранить текст" />
-          {% endif %}
-          </form>
 
         </div>
-
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          {% if is_admin %}
-          {% if edit %}
-          <a href="/item/{{ destiny.id }}/" class="btn btn-success btn-block">Сохранить</a>
-          {% else %}
-          <a href="?edit=1" class="btn btn-primary btn-block">Редактировать</a>
-          {% endif %}
-          <br>
-          {% endif %}
-          <div class="sidebar-module sidebar-module-inset">
-            {% if destiny.author %} <h5><strong>Автор: </strong>{{ destiny.author.name }}</h5> {% endif %}
-            {% if destiny.object_type.name %}<h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5> {% endif %}
-            {% if destiny.date %} <h5><strong>Год: </strong>{{ destiny.date }}</h5> {% endif %}
-          </div>
-        </div><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->
 

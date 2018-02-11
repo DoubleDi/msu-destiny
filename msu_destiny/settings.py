@@ -25,6 +25,8 @@ SECRET_KEY = 'p*mti^oepk4*3bd(f%e-p)nj%izj28c+d5l^(p)=lh1y+6k^w2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# AUTH_USER_MODEL = 'destiny.DestinyUser'
+
 ALLOWED_HOSTS = ['152807.simplecloud.ru', '85.143.174.33', 'artmsu.ru']
 
 
@@ -126,6 +128,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticdir')]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
+
+
 
 LOGGING = {
     'version': 1,

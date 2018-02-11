@@ -1,25 +1,32 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-from destiny.models import DestinyObject, PhotoItem, ObjectType, Place, Author
-from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.contrib.auth.decorators import login_required
+import json
+import logging
+import os
+import sys
+import urllib
+
+reload(sys)
+sys.setdefaultencoding('utf8')
+
+from PIL import Image
+
+from destiny.models import Author, DestinyObject, ObjectType, PhotoItem, Place
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Q, Prefetch
 from django.core import serializers
 from django.core.mail import send_mail
+from django.db.models import Prefetch, Q
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.template.loader import render_to_string
-from msu_destiny.settings import BASE_DIR, STATIC_ROOT, MEDIA_ROOT
-
-import urllib
-import logging
-import json
-import sys
-import os
+from msu_destiny.settings import BASE_DIR, MEDIA_ROOT, STATIC_ROOT
+from random import randint
 
 logger = logging.getLogger('django')
+
 
 def auth_page(request):
     if request.method == 'GET':
@@ -30,12 +37,13 @@ def auth_page(request):
         else:
             return render(request, 'auth.html', params)
 
+
 @login_required(login_url='/auth')
 def main_page(request):
     if request.method == 'GET':
         params = request.GET
 
-        logger.info('PARAMS', params)
+        logger.info('PARAMS {}'.format(params))
 
         input_params = {
             'name': params.get('name', ''),
@@ -92,6 +100,8 @@ def main_page(request):
 
         for destiny in destiny_objects:
             pictures = PhotoItem.objects.filter(photo_item = destiny)
+
+            optimize_pictures(pictures)
             if len(pictures):
                 destiny.picture = pictures[0]
         
@@ -107,6 +117,7 @@ def main_page(request):
             'faculties': faculties,
             'count': count_all,
             'placeholders': input_params,
+            'is_admin': request.user.is_staff
         })
 
 
@@ -123,7 +134,7 @@ def serve_image(request, uri):
 @login_required(login_url='/auth')
 def photo_page(request, id):
     if request.method == 'GET':
-        params = {}
+        params = request.GET
         try:
             destiny = DestinyObject.objects.get(id=id)
         except Exception as e:
@@ -131,9 +142,17 @@ def photo_page(request, id):
         
         photo = PhotoItem.objects.filter(photo_item = destiny)
         for p in photo:
-            p.text = '<br>'.join(p.info.split('\n'))
-        
-        return render(request, 'photo.html', {'destiny': destiny, 'photo': photo})
+            if p.info:
+                p.text = '<br>'.join(p.info.split('\n'))
+        if destiny.info:
+            destiny.text = '<br>'.join(destiny.info.split('\n'))
+
+        optimize_pictures(photo)
+
+        edit = params.get('edit', False) if request.user.is_staff else False
+        return render(request, 'photo.html', { 'destiny': destiny, 'photo': photo, 'edit': edit, 
+            'is_admin': request.user.is_staff })
+
 
 def login(request):
     if request.method == 'POST': 
@@ -159,6 +178,7 @@ def login(request):
         auth.login(request, user)
         return HttpResponseRedirect('/')
 
+
 def logout(request):
     if request.method == 'GET':
         if request.user.is_authenticated():
@@ -166,11 +186,102 @@ def logout(request):
         return HttpResponseRedirect('/auth')
 
 
+def optimize_pictures(pictures):
+    for p in pictures:
+        path = MEDIA_ROOT + p.photo.name
+        if os.path.getsize(path) > 1024 * 1024:
+
+            logger.warning("Optimizing image {} {} {} {}".format(
+                path, MEDIA_ROOT, p.photo.name, os.path.getsize(path)))
+            
+            image = Image.open(path)
+            k = 1024.0 / max(image.size)
+            image = image.resize(
+                (int(image.size[0] * k), int(image.size[1] * k)), Image.ANTIALIAS)
+            image.save(path, optimize=True, quality=80)
+            
+            logger.warning("Optimized image {} {} {} {}".format(
+                path, MEDIA_ROOT, p.photo.name, os.path.getsize(path)))
 
 
+def handle_uploaded_file(f, path):
+    with open(path, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 
+@login_required(login_url='/auth')
+def edit_object(request, id):
+    if request.method == 'POST':
+        if not request.user.is_staff:
+            return HttpResponseRedirect('/item/'+id+'/')
+
+        text = request.POST.get('text', False)
+
+        if text:
+            try:
+                destiny = DestinyObject.objects.get(id=id)
+                destiny.info = text
+                destiny.save()
+            except Exception as e:
+                pass
+
+            return HttpResponseRedirect('/item/'+id+'/?edit=1')
 
 
+@login_required(login_url='/auth')
+def create_page(request):
+    if request.method == 'GET':
+        if not request.user.is_staff:
+            return HttpResponseRedirect('/')
 
+    return render(request, 'create.html', { 
+        'edit': True,
+        'authors': Author.objects.all().order_by('name'),
+        'types': ObjectType.objects.all().order_by('name'),
+        'places': Place.objects.all().order_by('name'),
+    })
+
+
+@login_required(login_url='/auth')
+def create_object(request):
+    pass
+
+
+@login_required(login_url='/auth')
+def add_photo(request, id):
+    if request.method == 'POST':
+        if not request.user.is_staff:
+            return HttpResponseRedirect('/item/'+id+'/')
+
+        files = request.FILES
+
+        for f in files.getlist('images'):
+            name = str(randint(1, 100000000)) + f.name
+            logger.info("NEW FILES {}".format(name))
+            handle_uploaded_file(f, os.path.join(BASE_DIR, 'media/' + name))
+
+            try:
+                PhotoItem.objects.create(
+                    photo = name,
+                    photo_item = DestinyObject.objects.get(id=id),
+                )
+            except Exception as e:
+                pass
+        
+        return HttpResponseRedirect('/item/'+id+'/?edit=1')
+    
+    
+@login_required(login_url='/auth')
+def delete_photo(request, id, photo_id):
+    if request.method == 'POST':
+        if not request.user.is_staff:
+            return HttpResponseRedirect('/item/'+id+'/')
+
+        try:
+            PhotoItem.objects.get(id=photo_id).delete()
+        except Exception as e:
+            pass
+
+        return HttpResponseRedirect('/item/'+id+'/?edit=1')
 

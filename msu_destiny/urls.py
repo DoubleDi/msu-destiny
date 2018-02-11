@@ -22,6 +22,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^media/(.+)?', views.serve_image),
     url(r'^admin/?', admin.site.urls),
+    url(r'^item/create_object/?', views.create_object),
+    url(r'^item/create/?', views.create_page),
+    url(r'^item/(\d+)/edit/?', views.edit_object),
+    url(r'^item/(\d+)/add_photo/?', views.add_photo),
+    url(r'^item/(\d+)/delete_photo/(\d+)/?', views.delete_photo),
     url(r'^item/(\d+)/?', views.photo_page),
     url(r'^auth/?', views.auth_page),
     url(r'^login/?', views.login),

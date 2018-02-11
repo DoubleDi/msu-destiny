@@ -7,5 +7,7 @@
 *DS*Store
 .idea/*
 nohup.out
+*.log
 destiny/migrations/*
 media/*
+*.sql

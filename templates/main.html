@@ -39,7 +39,7 @@
           <a href="/">Поиск</a>
         </li>
         <li>
-          <a href="/admin">Редактировать</a>
+          <a href="/admin">Администрирование</a>
         </li>
         <li>
           <a href="/logout">Выйти</a>
@@ -73,6 +73,10 @@
             <input type="text" name="author" value="{{ placeholders.author }}"  class="form-control search-query" type="text" >
             <label class="control-label" for="inputYear">Год</label>
             <input type="text" name="year" value="{{ placeholders.year }}" class="form-control search-query">
+            <br>
+            {% if is_admin %}
+            <a href="/item/create" class="btn btn-block btn-default">Создать</a>
+            {% endif %}
           </div>
           <div class="col-sm-6">
             <label class="control-label" for="inputType">Тип</label>
@@ -130,7 +134,7 @@
             <input type="text" name="extra" value="{{ placeholders.extra }}" class="form-control search-query">
 
             <br>
-            <button type="submit" class="btn btn-block">Поиск</button>
+            <button type="submit" class="btn btn-block btn-default">Поиск</button>
           </div>
         </form>
       </div>
@@ -138,9 +142,11 @@
       {% for destiny in destiny_objects %}
       <div class="jumbotron row">
         <div class="col-sm-3">
+          {% if destiny.picture.photo %} 
           <a href="/item/{{ destiny.id }}">
             <img src="/media/{{ destiny.picture.photo }}" width="100%" class="img-polaroid" align="left">
           </a>
+          {% endif %} 
         </div>
         <div class="col-sm-8">
           <h2 class="text-center">{{ destiny.name }}</h2>
