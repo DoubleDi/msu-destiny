@@ -49,22 +49,13 @@
 
 
     <div class="container">
-      <div class="blog-header">
-        <h1 class="blog-title">{{ destiny.name }}</h1>
-        <p class="lead blog-description">
-          {% if destiny.author %} {{ destiny.author.name }}, {% endif %}
-          {% if destiny.object_type.name %} {{ destiny.object_type.name }}, {% endif %}
-          {% if destiny.date %} {{ destiny.date }}, {% endif %} 
-          {% if destiny.place.name %} {{ destiny.place.name }} {% endif %}
-        </p>
-      </div>
-
       <div class="row">
+        <form action="/item/create_object" method="post" enctype="multipart/form-data">
 
         <div class="col-sm-7 blog-main">
-            <form action="/item/{{ destiny.id }}/add_photo" method="post" enctype="multipart/form-data">
               {% csrf_token %}
               <div>
+                <label class="control-label" for="inputTitle">Фотографии</label>
                 <input type="file" class="form-control" id="images" name="images" multiple/>
               </div>
               
@@ -73,48 +64,60 @@
                 <input type="text" name="name" class="form-control search-query">
               </div>
               
-              <div>
+              <div class="author-box">
               <label class="control-label" for="inputType">Автор</label>
               <select name="author" class="form-control btn dropdown-toggle btn-block">
+              <option selected="selected" value="">Любой</option>
               {% for a in authors %} 
               <option value="{{ a.name }}">{{ a.name }}</option>
               {% endfor %}
               </select>
               </div>
+              <button type="button" class="btn btn-default btn-xs author-add">+</button>
+
                 
               <div>
                 <label class="control-label" for="inputType">Информация</label>
                 <textarea class="form-control search-query" rows="10" name="text" id="text">{{ destiny.info }}</textarea>
               </div>
 
-              <div>
+              <div class="type-box">
                 <label class="control-label" for="inputType">Тип</label>
-                <select name="type" class="form-control btn dropdown-toggle btn-block">
-                  {% for t in types %}
+                <select name="object_type" class="form-control btn dropdown-toggle btn-block">
+                  <option selected="selected" value="">Любой</option>
+                  {% for t in types %} 
                   <option value="{{ t.name }}">{{ t.name }}</option>
                   {% endfor %}
                 </select>
               </div>
+              <button type="button" class="btn btn-default btn-xs type-add">+</button>
+
 
               <div>
                 <label class="control-label" for="inputTitle">Год</label>
-                <input type="text" name="year" class="form-control search-query">
+                <input type="text" name="date" value="{{ destiny.year }}" class="form-control search-query">
               </div>
 
-              <div>
-                <label class="control-label" for="inputType">Место</label>
+              <div class="place-box">
+                <label class="control-label" for="inputType">Подразделение</label>
                 <select name="place" class="form-control btn dropdown-toggle btn-block">
+                  <option selected="selected" value="">Любое</option>
                   {% for p in places %}
                   <option value="{{ p.name }}">{{ p.name }}</option>
                   {% endfor %}
                 </select>
               </div>
+              <button type="button" class="btn btn-default btn-xs place-add">+</button>
               <br>
-              <input type="submit" class="btn btn-default" name='submit_text' value="Сохранить" />
-            </form>
-
-        </div>
-
+              <br>
+              
+            </div>
+            <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+              
+              <input type="submit" class="btn btn-success btn-block" value="Сохранить">
+            </div> <!-- /.blog-sidebar -->
+            
+          </form>
       </div><!-- /.row -->
 
     </div><!-- /.container -->
@@ -134,5 +137,18 @@
     <script src="{% static "js/bootstrap.min.main.js" %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+    <script>
+      $(document).ready(function () {
+        $(".author-add").click(function () {
+          $(".author-box").html('<label class="control-label" for="inputType">Автор</label>\n<input type="text" name="author" class="form-control search-query">')
+        });
+        $(".type-add").click(function () {
+          $(".type-box").html('<label class="control-label" for="inputType">Тип</label>\n<input type="text" name="object_type" class="form-control search-query">')
+        });
+        $(".place-add").click(function () {
+          $(".place-box").html('<label class="control-label" for="inputType">Подразделение</label>\n<input type="text" name="place" class="form-control search-query">')
+        });
+      });
+    </script>
   </body>
 </html>

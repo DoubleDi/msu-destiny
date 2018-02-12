@@ -49,6 +49,7 @@
 
 
     <div class="container">
+      {% if not edit %}
       <div class="blog-header">
         <h1 class="blog-title">{{ destiny.name }}</h1>
         <p class="lead blog-description">
@@ -58,80 +59,135 @@
           {% if destiny.place.name %} {{ destiny.place.name }} {% endif %}
         </p>
       </div>
-
+      {% endif %}
       <div class="row">
-
+        <form action="/item/{{ destiny.id }}/edit/" method="post" enctype="multipart/form-data">
+           {% csrf_token %}
         <div class="col-sm-7 blog-main">
-          {% for p in photo %}
+           {% for p in photo %}
           <div class="blog-post">
-            <img src="/media/{{ p.photo }}" width="100%" class="img-polaroid">
+            <img src="/media/{{ p.photo }}" width="100%" class="img-polaroid"> 
             {% if p.date or edit %}
             <blockquote>
-              {% if p.date %}
               <p>
-                Дата изменения: {{ p.date }}
+                <a href="/item/{{ destiny.id }}/delete_photo/{{ p.id }}" class="btn btn-danger">Удалить</a>
               </p>
-              {% endif %}
-              {% if edit %}
-              <p>
-                <form action="/item/{{ destiny.id }}/delete_photo/{{ p.id }}" method="post">
-                  {% csrf_token %}
-                  <input type="submit" class="btn btn-danger" value="Удалить" />
-                </form>
-              </p>
-              {% endif %}
             </blockquote>
             {% endif %}
-          </div><!-- /.blog-post -->
+          </div>
+          <!-- /.blog-post -->
           {% endfor %}
           {% if edit %}
-          <div class="row">
-            <form action="/item/{{ destiny.id }}/add_photo" method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="col-sm-8">
-                <input type="file" class="form-control" id="images" name="images" multiple/>
-              </div>
-              <div class="col-sm-3">
-                <input type="submit" class="btn btn-success" name='submit_image' value="Загрузить фотографии" />
-              </div>
-            </form>
+          <div>
+            <label class="control-label" for="inputTitle">Фотографии</label>
+            <input type="file" class="form-control" id="images" name="images" multiple/>
           </div>
+          
+          <div>
+            <label class="control-label" for="inputTitle">Название</label>
+            <input type="text" name="name" value="{{ destiny.name }}" class="form-control search-query">
+          </div>
+          
+          <div class="author-box">
+            <label class="control-label" for="inputType">Автор</label>
+            <select name="author" class="form-control btn dropdown-toggle btn-block">
+              {% if destiny.author %}
+              <option value="">Любой</option>
+              {% else %}
+              <option selected="selected" value="">Любой</option>
+              {% endif %} 
+              {% for a in authors %} 
+              {% if a.name == destiny.author.name %}
+              <option selected="selected" value="{{ a.name }}">{{ a.name }}</option>
+              {% else %}
+              <option value="{{ a.name }}">{{ a.name }}</option>
+              {% endif %} 
+              {% endfor %}
+            </select>
+          </div>
+          <button type="button" class="btn btn-default btn-xs author-add">+</button>
+          
+          <div>
+            <label class="control-label" for="inputType">Информация</label>
+            <textarea class="form-control search-query" rows="10" name="text" id="text">{{ destiny.info }}</textarea>
+          </div>
+          
+          <div class="type-box">
+            <label class="control-label" for="inputType">Тип</label>
+            <select name="object_type" class="form-control btn dropdown-toggle btn-block">
+              {% if destiny.object_type.name %}
+              <option value="">Любой</option>
+              {% else %}
+              <option selected="selected" value="">Любой</option>
+              {% endif %} 
+              {% for t in types %} 
+              {% if t.name == destiny.object_type.name %}
+              <option selected="selected" value="{{ t.name }}">{{ t.name }}</option>
+              {% else %}
+              <option value="{{ t.name }}">{{ t.name }}</option>
+              {% endif %} 
+              {% endfor %}
+            </select>  
+          </div>
+          <button type="button" class="btn btn-default btn-xs type-add">+</button>
+
+          <div>
+            <label class="control-label" for="inputTitle">Год</label>
+            <input type="text" name="date" value="{{ destiny.date }}" class="form-control search-query">
+          </div>
+          
+          <div class="place-box">
+            <label class="control-label" for="inputType">Подразделение</label>
+            <select name="place" class="form-control btn dropdown-toggle btn-block">
+              {% if destiny.place.name %}
+              <option value="">Любое</option>
+              {% else %}
+              <option selected="selected" value="">Любое</option>
+              {% endif %} 
+              {% for p in places %} 
+              {% if p.name == destiny.place.name %}
+              <option selected="selected" value="{{ p.name }}">{{ p.name }}</option>
+              {% else %}
+              <option value="{{ p.name }}">{{ p.name }}</option>
+              {% endif %} 
+              {% endfor %}
+            </select>
+          </div>
+          <button type="button" class="btn btn-default btn-xs place-add">+</button>
+
           {% endif %}
           <br>
-          <form action="/item/{{ destiny.id }}/edit" method="post">
-          {% csrf_token %}
+          <br>
+          {% if not edit %}
           <blockquote>
             <p>
-              {% if edit %}
-              <textarea class="form-control" rows="10" name="text" id="text">{{ destiny.info }}</textarea>
-              {% else %}
               {{ destiny.text|safe }}
-              {% endif %}
             </p>
           </blockquote>
-          {% if edit %}
-          <input type="submit" class="btn btn-success" name='submit_text' value="Сохранить текст" />
           {% endif %}
-          </form>
 
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           {% if is_admin %}
           {% if edit %}
-          <a href="/item/{{ destiny.id }}/" class="btn btn-success btn-block">Сохранить</a>
+          <input type="submit" class="btn btn-success btn-block" value="Сохранить" />
+          <a href="/item/{{ destiny.id }}/delete_object" class="btn btn-danger btn-block">Удалить</a>
+
           {% else %}
           <a href="?edit=1" class="btn btn-primary btn-block">Редактировать</a>
           {% endif %}
           <br>
           {% endif %}
+          {% if not edit %} 
           <div class="sidebar-module sidebar-module-inset">
             {% if destiny.author %} <h5><strong>Автор: </strong>{{ destiny.author.name }}</h5> {% endif %}
             {% if destiny.object_type.name %}<h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5> {% endif %}
             {% if destiny.date %} <h5><strong>Год: </strong>{{ destiny.date }}</h5> {% endif %}
           </div>
+          {% endif %}
         </div><!-- /.blog-sidebar -->
-
+        </form>
       </div><!-- /.row -->
 
     </div><!-- /.container -->
@@ -151,5 +207,18 @@
     <script src="{% static "js/bootstrap.min.main.js" %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+          $(".author-add").click(function () {
+            $(".author-box").html('<label class="control-label" for="inputType">Автор</label>\n<input type="text" name="author" class="form-control search-query">')
+          });
+          $(".type-add").click(function () {
+            $(".type-box").html('<label class="control-label" for="inputType">Тип</label>\n<input type="text" name="object_type" class="form-control search-query">')
+          });
+          $(".place-add").click(function () {
+            $(".place-box").html('<label class="control-label" for="inputType">Подразделение</label>\n<input type="text" name="place" class="form-control search-query">')
+          });
+        });
+    </script>
   </body>
 </html>

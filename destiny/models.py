@@ -102,10 +102,10 @@ class DestinyObject(models.Model):
 
 class PhotoItem(models.Model):
     photo = models.ImageField(upload_to='photo/', blank=True, verbose_name="фото", null=True)
-    info = models.TextField("text", blank = True, null = True)
+    # info = models.TextField("text", blank = True, null = True)
     # comment = models.CharField(max_length=50, verbose_name="Комментарий", blank = True, null = True)
     photo_item = models.ForeignKey("DestinyObject", verbose_name="Карточки")
-    date = models.CharField(max_length=50, verbose_name="Год", blank=True, null=True)
+    # date = models.CharField(max_length=50, verbose_name="Год", blank=True, null=True)
 
     class Meta:
         verbose_name = "Фотография"
@@ -127,8 +127,8 @@ class ObjectType(models.Model):
 
 class Place(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название подразделения")
-    users_to_edit = models.ManyToManyField(User, verbose_name="Пользователи, которые могут изменять подразделение", 
-        blank=True, null=True)
+    # users_to_edit = models.ManyToManyField(User, verbose_name="Пользователи, которые могут изменять подразделение", 
+        # blank=True, null=True)
 
     class Meta:
         verbose_name = "Подразделение"

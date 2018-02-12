@@ -141,17 +141,21 @@ def photo_page(request, id):
             raise Http404("Пользователя не существует")
         
         photo = PhotoItem.objects.filter(photo_item = destiny)
-        for p in photo:
-            if p.info:
-                p.text = '<br>'.join(p.info.split('\n'))
         if destiny.info:
             destiny.text = '<br>'.join(destiny.info.split('\n'))
 
         optimize_pictures(photo)
 
         edit = params.get('edit', False) if request.user.is_staff else False
-        return render(request, 'photo.html', { 'destiny': destiny, 'photo': photo, 'edit': edit, 
-            'is_admin': request.user.is_staff })
+        return render(request, 'photo.html', { 
+            'destiny': destiny, 
+            'photo': photo, 
+            'edit': edit, 
+            'is_admin': request.user.is_staff,
+            'authors': Author.objects.all().order_by('name'),
+            'types': ObjectType.objects.all().order_by('name'),
+            'places': Place.objects.all().order_by('name'),
+        })
 
 
 def login(request):
@@ -216,17 +220,49 @@ def edit_object(request, id):
         if not request.user.is_staff:
             return HttpResponseRedirect('/item/'+id+'/')
 
+        try:
+            destiny = DestinyObject.objects.get(id=id)
+        except Exception as e:
+            return HttpResponseRedirect('/item/'+id+'/?edit=1')
+
+
+        add_photo(request, id)
+        name = request.POST.get('name', False)
+        text = request.POST.get('text', False)
+        date = request.POST.get('date', False)
         text = request.POST.get('text', False)
 
-        if text:
-            try:
-                destiny = DestinyObject.objects.get(id=id)
-                destiny.info = text
-                destiny.save()
-            except Exception as e:
-                pass
+        try:
+            author_name = request.POST.get('author', False)
+            author = Author.objects.get(name=author_name)
+        except Exception as e:
+            author = Author.objects.create(name=author_name)
+        try:
+            place_name = request.POST.get('place', False)
+            place = Place.objects.get(name=place_name)
+        except Exception as e:
+            place = Place.objects.create(name=place_name)
+        try:
+            object_type_name = request.POST.get('object_type', False)
+            object_type = ObjectType.objects.get(name=object_type_name)
+        except Exception as e:
+            object_type = ObjectType.objects.create(name=object_type_name)
 
-            return HttpResponseRedirect('/item/'+id+'/?edit=1')
+        if name != False:
+            destiny.name = name
+        if author != False:
+            destiny.author = author
+        if text != False:
+            destiny.info = text
+        if object_type != False:
+            destiny.object_type = object_type
+        if date != False:
+            destiny.date = date
+        if place != False:
+            destiny.place = place
+
+        destiny.save()
+        return HttpResponseRedirect('/item/'+id+'/')
 
 
 @login_required(login_url='/auth')
@@ -245,7 +281,51 @@ def create_page(request):
 
 @login_required(login_url='/auth')
 def create_object(request):
-    pass
+    if request.method == 'POST':
+        if not request.user.is_staff:
+            return HttpResponseRedirect('/')
+
+        name = request.POST.get('name', False)
+        text = request.POST.get('text', False)
+        text = request.POST.get('text', False)
+        date = request.POST.get('date', False)
+
+        try:
+            author_name = request.POST.get('author', False)
+            author = Author.objects.get(name=author_name)
+        except Exception as e:
+            author = Author.objects.create(name=author_name)
+        try:
+            place_name = request.POST.get('place', False)
+            place = Place.objects.get(name=place_name)
+        except Exception as e:
+            place = Place.objects.create(name=place_name)
+        try:
+            object_type_name = request.POST.get('object_type', False)
+            object_type = ObjectType.objects.get(name=object_type_name)
+        except Exception as e:
+            object_type = ObjectType.objects.create(name=object_type_name)
+
+
+        params = {}
+        if name != False:
+            params['name'] = name
+        if author != False:
+            params['author'] = author
+        if text != False:
+            params['info'] = text
+        if object_type != False:
+            params['object_type'] = object_type
+        if date != False:
+            params['date'] = date
+        if place != False:
+            params['place'] = place
+
+        destiny_object = DestinyObject.objects.create(**params)
+
+        add_photo(request, str(destiny_object.id))
+        return HttpResponseRedirect('/item/'+str(destiny_object.id)+'/')
+        
 
 
 @login_required(login_url='/auth')
@@ -274,7 +354,7 @@ def add_photo(request, id):
     
 @login_required(login_url='/auth')
 def delete_photo(request, id, photo_id):
-    if request.method == 'POST':
+    if request.method == 'GET':
         if not request.user.is_staff:
             return HttpResponseRedirect('/item/'+id+'/')
 
@@ -284,4 +364,18 @@ def delete_photo(request, id, photo_id):
             pass
 
         return HttpResponseRedirect('/item/'+id+'/?edit=1')
+
+
+@login_required(login_url='/auth')
+def delete_object(request, id):
+    if request.method == 'GET':
+        if not request.user.is_staff:
+            return HttpResponseRedirect('/item/'+id+'/')
+
+        try:
+            DestinyObject.objects.get(id=id).delete()
+        except Exception as e:
+            pass
+
+        return HttpResponseRedirect('/')
 

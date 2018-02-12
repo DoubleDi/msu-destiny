@@ -11,19 +11,19 @@ class MemberInline(admin.TabularInline):
     show_change_link = True
 
     fieldsets = (
-        (None, {'fields': ('photo', 'info', 'id' )}),
+        (None, {'fields': ('photo', 'id' )}),
         # (None, {'fields': ('photo', 'info' )}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('photo', 'info', 'id'),
+            'fields': ('photo', 'id'),
             # 'fields': ('photo', 'info'),
         }),
     )
 
-    readonly_fields = ('photo', 'info', 'id')
+    readonly_fields = ('photo', 'id')
     # readonly_fields = ('photo', 'info')
 
     def has_add_permission(self, request):
@@ -75,11 +75,10 @@ class PhotoItemAdmin(admin.ModelAdmin):
     def get_author_name(self, obj):
         return obj.photo_item.author.name
 
-    search_fields = ['date', 'photo_item__name', 'photo_item__author__name']
+    search_fields = ['photo_item__name', 'photo_item__author__name']
     list_display = (
         'get_photo_item_name',
         'get_author_name',
-        'date',
         'id',
     )
 
