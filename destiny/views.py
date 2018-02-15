@@ -55,7 +55,7 @@ def main_page(request):
             'extra': params.get('extra', '')
         }
         
-        PAGE_COUNT = 10
+        PAGE_COUNT = 50
         last_page = 0
 
         page = int(params.get('page', '1'))
@@ -72,10 +72,7 @@ def main_page(request):
         if (input_params['type']):
             query &= Q(object_type__name__icontains=input_params['type'].lower())
         if (input_params['extra']):
-            photo_items = PhotoItem.objects.filter(info__icontains=input_params['extra'].lower())
-            destiny_ids = set(map(lambda x: x.photo_item.id, list(photo_items)))
-
-            query &= Q(id__in=destiny_ids)
+            query &= Q(info__icontains=input_params['extra'].lower())
 
         all = DestinyObject.objects.filter(query)
         if input_params['sort'] == 'desc':
@@ -101,7 +98,7 @@ def main_page(request):
         for destiny in destiny_objects:
             pictures = PhotoItem.objects.filter(photo_item = destiny)
 
-            optimize_pictures(pictures)
+            # optimize_pictures(pictures)
             if len(pictures):
                 destiny.picture = pictures[0]
         
@@ -144,7 +141,7 @@ def photo_page(request, id):
         if destiny.info:
             destiny.text = '<br>'.join(destiny.info.split('\n'))
 
-        optimize_pictures(photo)
+        # optimize_pictures(photo)
 
         edit = params.get('edit', False) if request.user.is_staff else False
         return render(request, 'photo.html', { 
