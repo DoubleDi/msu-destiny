@@ -67,13 +67,15 @@
            {% for p in photo %}
           <div class="blog-post">
             <img src="/media/{{ p.photo }}" width="100%" class="img-polaroid"> 
-            {% if p.date or edit %}
+            {% comment %}
+            {% if edit %}
             <blockquote>
               <p>
                 <a href="/item/{{ destiny.id }}/delete_photo/{{ p.id }}" class="btn btn-danger">Удалить</a>
               </p>
-            </blockquote>
+            </blockquote> 
             {% endif %}
+            {% endcomment %}
           </div>
           <!-- /.blog-post -->
           {% endfor %}
@@ -172,7 +174,7 @@
           {% if is_admin %}
           {% if edit %}
           <input type="submit" class="btn btn-success btn-block" value="Сохранить" />
-         <!-- <a href="/item/{{ destiny.id }}/delete_object" class="btn btn-danger btn-block">Удалить</a> -->
+         {% comment %}<a href="/item/{{ destiny.id }}/delete_object" class="btn btn-danger btn-block">Удалить</a> {% endcomment %}
 
           {% else %}
           <a href="?edit=1" class="btn btn-primary btn-block">Редактировать</a>
