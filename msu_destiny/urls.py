@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^media/(.+)?', views.serve_image),
+    url(r'^safemedia/(.+)?', views.safe_serve_image),
     url(r'^admin/?', admin.site.urls),
     url(r'^item/create_object/?', views.create_object),
     url(r'^item/create/?', views.create_page),
