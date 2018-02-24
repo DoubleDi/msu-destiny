@@ -134,8 +134,13 @@
           <button type="button" class="btn btn-default btn-xs type-add">+</button>
 
           <div>
-            <label class="control-label" for="inputTitle">Год</label>
+            <label class="control-label" for="inputYear">Год</label>
             <input type="text" name="date" value="{{ destiny.date }}" class="form-control search-query">
+          </div>
+
+          <div>
+            <label class="control-label" for="inputTabular">Инвентарный номер</label>
+            <input type="text" name="tabular" value="{{ destiny.tabular|default:"" }}" class="form-control search-query">
           </div>
           
           <div class="place-box">
@@ -186,6 +191,7 @@
             {% if destiny.author %} <h5><strong>Автор: </strong>{{ destiny.author.name }}</h5> {% endif %}
             {% if destiny.object_type.name %}<h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5> {% endif %}
             {% if destiny.date %} <h5><strong>Год: </strong>{{ destiny.date }}</h5> {% endif %}
+            {% if destiny.tabular %} <h5><strong>Номер: </strong>{{ destiny.tabular }}</h5> {% endif %}
           </div>
           {% endif %}
         </div><!-- /.blog-sidebar -->

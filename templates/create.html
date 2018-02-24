@@ -98,6 +98,11 @@
                 <input type="text" name="date" value="{{ destiny.year }}" class="form-control search-query">
               </div>
 
+              <div>
+                <label class="control-label" for="inputTabular">Инвентарный номер</label>
+                <input type="text" name="tabular" value="{{ destiny.tabular|default:" " }}" class="form-control search-query">
+              </div>
+
               <div class="place-box">
                 <label class="control-label" for="inputType">Подразделение</label>
                 <select name="place" class="form-control btn dropdown-toggle btn-block">

@@ -91,9 +91,11 @@ class DestinyObject(models.Model):
     object_type = models.ForeignKey("ObjectType", verbose_name="Тип обьекта", blank = True, null = True)
     date = models.CharField(max_length=50, verbose_name="Год", blank=True, null=True)
     place = models.ForeignKey("Place", verbose_name="Место нахождения", blank=True, null=True)
+    tabular = models.CharField(max_length=50, verbose_name="Инвентарный номер", blank=True, null=True)
+
     class Meta:
-        verbose_name = "Карточки"
-        verbose_name_plural = "Карточка"
+        verbose_name = "Карточка"
+        verbose_name_plural = "Карточки"
         # indexes = [ models.Index(fields=[ 'name' ]), models.Index(fields=[ 'is_hidden', 'member_count' ]) ]
         
     def __unicode__(self):

@@ -27,20 +27,45 @@
       <strong>Ошибка:</strong> {{ message }}
     </div>
     {% endif %}
-
-    <form class="form-signin">
-      {% csrf_token %}
-      <h2 class="form-signin-heading">Авторизуйтесь</h2>
-      <label for="email" class="sr-only">Логин или Email адрес</label>
-      <input type="" name="email" class="form-control" placeholder="Email адрес или Логин" required autofocus>
-      <label for="password" class="sr-only">Пароль</label>
-      <input type="password" name="password" class="form-control" placeholder="Пароль" required>
-      <button class="btn btn-lg btn-primary btn-block" formaction="/login" formmethod="post" type="submit">Войти</button>
-    </form>
-
     </div> <!-- /container -->
+
+    <div class="wrapper">
+      <div class="animation">
+        <div class="animation__eye animation__eye--one-one"></div>
+        <div class="animation__eye animation__eye--one-two"></div>
+        <div class="animation__eye animation__eye--two-one"></div>
+        <div class="animation__eye animation__eye--two-two"></div>
+        <img class="animation__video" src="media/watchers.png" width="384" height="374" alt="">
+        {% comment %} <video class="animation__video" width="384" height="374" loop muted autoplay>
+          <source src="video/watchers.mp4" type="video/mp4">
+        </video> {% endcomment %}
+      </div>
+      <form class="form-signin">
+         {% csrf_token %}
+        <fieldset class="form__fieldset">
+          <label class="form__field form__field--login">
+            <span class="form__label">Логин/email</span>
+            <input class="form__input form__input--login" name="email" type="text">
+          </label>
+          <label class="form__field form__field--password">
+            <span class="form__label">Пароль</span>
+            <input class="form__input form__input--password" name="password" type="password">
+          </label>
+        </fieldset>
+        <button class="form__button" formaction="/login" formmethod="post" type="submit">Войти</button>
+      </form>
+    </div>
+     {% comment %} form class="form-signin"> {% csrf_token %}
+    <h2 class="form-signin-heading">Авторизуйтесь</h2>
+    <label for="email" class="sr-only">Логин или Email адрес</label>
+    <input type="" name="email" class="form-control" placeholder="Email адрес или Логин" required autofocus>
+    <label for="password" class="sr-only">Пароль</label>
+    <input type="password" name="password" class="form-control" placeholder="Пароль" required>
+    <button class="btn btn-lg btn-primary btn-block" formaction="/login" formmethod="post" type="submit">Войти</button>
+    </form> {% endcomment %}
 
 
     <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+    <script src="{% static "js/auth.js" %}"></script>
   </body>
 </html>

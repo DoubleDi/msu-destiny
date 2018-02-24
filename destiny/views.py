@@ -52,7 +52,8 @@ def main_page(request):
             'place': params.get('place', ''),
             'type': params.get('type', ''),
             'sort': params.get('sort', ''),
-            'extra': params.get('extra', '')
+            'extra': params.get('extra', ''),
+            'tabular': params.get('tabular', ''),
         }
         
         PAGE_COUNT = 50
@@ -73,6 +74,8 @@ def main_page(request):
             query &= Q(object_type__name__icontains=input_params['type'].lower())
         if (input_params['extra']):
             query &= Q(info__icontains=input_params['extra'].lower())
+        if (input_params['tabular']):
+            query &= Q(tabular__icontains=input_params['tabular'].lower())
 
         all = DestinyObject.objects.filter(query)
         if input_params['sort'] == 'desc':
@@ -118,7 +121,6 @@ def main_page(request):
         })
 
 
-@login_required(login_url='/auth')
 def serve_image(request, uri):
     if not os.path.exists(os.path.join(MEDIA_ROOT, uri)):
         raise Http404("Изображения не существует")
@@ -228,6 +230,7 @@ def edit_object(request, id):
         text = request.POST.get('text', False)
         date = request.POST.get('date', False)
         text = request.POST.get('text', False)
+        tabular = request.POST.get('tabular', False)
 
         try:
             author_name = request.POST.get('author', False)
@@ -257,6 +260,8 @@ def edit_object(request, id):
             destiny.date = date
         if place != False:
             destiny.place = place
+        if tabular != False:
+            destiny.tabular = tabular
 
         destiny.save()
         return HttpResponseRedirect('/item/'+id+'/')
@@ -286,6 +291,7 @@ def create_object(request):
         text = request.POST.get('text', False)
         text = request.POST.get('text', False)
         date = request.POST.get('date', False)
+        tabular = request.POST.get('tabular', False)
 
         try:
             author_name = request.POST.get('author', False)
@@ -317,6 +323,8 @@ def create_object(request):
             params['date'] = date
         if place != False:
             params['place'] = place
+        if tabular != False:
+            params['tabular'] = tabular
 
         destiny_object = DestinyObject.objects.create(**params)
 
