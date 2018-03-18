@@ -47,10 +47,10 @@ body {
 }
 
 .wrapper {
-    width: 384px;
+    width: 187px;
     margin: 0 auto;
-    padding-left: 8px;
-    padding-top: 8px;
+    padding-left: 0px;
+    padding-top: 0px;
     padding-right: 8px;
     padding-bottom: 10px;
     border-radius: 5px;
@@ -66,13 +66,15 @@ body {
     position: relative;
     max-height: 0;
     transition: max-height 0.4s ease-out;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .animation__eye {
     position: absolute;
     display: none;
-    width: 6px;
-    height: 5px;
+    width: 4px;
+    height: 3px;
     background-image: url("eye.png");
     background-repeat: no-repeat;
     z-index: 1;
@@ -81,27 +83,29 @@ body {
 
 .animation__eye--one-one {
     left: 58px;
-    top: 107px;
+    top: 53px;
 }
 
 .animation__eye--one-two {
-    left: 104px;
-    top: 108px;
+    left: 52px;
+    top: 54px;
 }
 
 .animation__eye--two-one {
-    left: 250px;
-    top: 164px;
+    left: 125px;
+    top: 82px;
 }
 
 .animation__eye--two-two {
-    left: 296px;
-    top: 164px;
+    left: 148px;
+    top: 82px;
 }
 
 .animation__video {
     display: none;
     opacity: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .form {

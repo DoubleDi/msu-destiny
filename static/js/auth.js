@@ -32,7 +32,7 @@
             fadeIn(eye[i], 2000);
         }
 
-        animation.style.maxHeight = "374px";
+        animation.style.maxHeight = "187px";
         animationVideo.style.display = "block";
         fadeIn(animationVideo, 2000);
         fadeIn(about, 2000);
@@ -82,140 +82,140 @@
 
     function setPositionOne(len) {
         if (len < 2) {
-            eyeOneOne.style.left = "56px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "101px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "28px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "50px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len < 3) {
-            eyeOneOne.style.left = "57px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "102px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "28px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "51px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len < 4) {
-            eyeOneOne.style.left = "58px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "103px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "29px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "52px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len < 5) {
-            eyeOneOne.style.left = "59px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "104px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "29px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "52px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len < 6) {
-            eyeOneOne.style.left = "60px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "104px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "30px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "52px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len < 7) {
-            eyeOneOne.style.left = "61px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "105px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "31px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "53px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len < 8) {
-            eyeOneOne.style.left = "62px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "106px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "31px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "53px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len < 9) {
-            eyeOneOne.style.left = "63px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "107px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "32px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "54px";
+            eyeOneTwo.style.top = "55px";
         }
         else if (len > 12) {
-            eyeOneOne.style.left = "64px";
-            eyeOneOne.style.top = "110px";
-            eyeOneTwo.style.left = "108px";
-            eyeOneTwo.style.top = "111px";
+            eyeOneOne.style.left = "32px";
+            eyeOneOne.style.top = "55px";
+            eyeOneTwo.style.left = "54px";
+            eyeOneTwo.style.top = "55px";
         }
     }
 
     function setPositionTwo(len) {
         if (len < 2) {
-            eyeTwoOne.style.left = "245px";
-            eyeTwoOne.style.top = "167px";
-            eyeTwoTwo.style.left = "290px";
-            eyeTwoTwo.style.top = "168px";
+            eyeTwoOne.style.left = "123px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "145px";
+            eyeTwoTwo.style.top = "84px";
         }
         else if (len < 3) {
-            eyeTwoOne.style.left = "246px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "291px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "123px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "146px";
+            eyeTwoTwo.style.top = "84px";
         }
         else if (len < 4) {
-            eyeTwoOne.style.left = "247px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "292px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "123px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "146px";
+            eyeTwoTwo.style.top = "85px";
         }
         else if (len < 5) {
-            eyeTwoOne.style.left = "248px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "293px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "124px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "146px";
+            eyeTwoTwo.style.top = "85px";
         }
         else if (len < 6) {
-            eyeTwoOne.style.left = "249px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "294px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "124px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "147px";
+            eyeTwoTwo.style.top = "84,5px";
         }
         else if (len < 7) {
-            eyeTwoOne.style.left = "250px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "294px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "125px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "147px";
+            eyeTwoTwo.style.top = "85px";
         }
         else if (len < 8) {
-            eyeTwoOne.style.left = "250px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "294px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "125px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "147px";
+            eyeTwoTwo.style.top = "85px";
         }
         else if (len === 11) {
-            eyeTwoOne.style.left = "251px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "295px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "125px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "147px";
+            eyeTwoTwo.style.top = "85px";
         }
         else if (len === 12) {
-            eyeTwoOne.style.left = "252px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "296px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "126px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "148px";
+            eyeTwoTwo.style.top = "85px";
         }
         else if (len === 13) {
-            eyeTwoOne.style.left = "253px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "297px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "126px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "148px";
+            eyeTwoTwo.style.top = "85px";
         }
         else if (len > 13) {
-            eyeTwoOne.style.left = "254px";
-            eyeTwoOne.style.top = "168px";
-            eyeTwoTwo.style.left = "298px";
-            eyeTwoTwo.style.top = "169px";
+            eyeTwoOne.style.left = "127px";
+            eyeTwoOne.style.top = "84px";
+            eyeTwoTwo.style.left = "149px";
+            eyeTwoTwo.style.top = "85px";
         }
     }
 
     function blurHandler() {
-        eyeOneOne.style.left = "58px";
-        eyeOneOne.style.top = "107px";
-        eyeOneTwo.style.left = "104px";
-        eyeOneTwo.style.top = "108px";
+        eyeOneOne.style.left = "29px";
+        eyeOneOne.style.top = "54px";
+        eyeOneTwo.style.left = "52px";
+        eyeOneTwo.style.top = "54px";
 
-        eyeTwoOne.style.left = "250px";
-        eyeTwoOne.style.top = "164px";
-        eyeTwoTwo.style.left = "296px";
-        eyeTwoTwo.style.top = "164px";
+        eyeTwoOne.style.left = "125px";
+        eyeTwoOne.style.top = "82px";
+        eyeTwoTwo.style.left = "148px";
+        eyeTwoTwo.style.top = "82px";
     }
 
     function clickHandler() {
