@@ -38,13 +38,13 @@ class DestinyObjectAdmin(admin.ModelAdmin):
     def get_author_name(self, obj):
         return obj.author.name if obj.place else ''
 
-    search_fields = ['name', 'date', 'author__name', 'place__name']
+    search_fields = ['id', 'name', 'date', 'author__name', 'place__name']
     list_display = (
         'name', 
         'get_author_name',
         'get_place_name',
         'date', 
-        'id'
+        'id',
     )
     
     # filter_horizontal = ("author", "place")

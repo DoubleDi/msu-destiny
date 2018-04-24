@@ -158,6 +158,14 @@
             {% if destiny.place.name %} {{ destiny.place.name }} {% endif %}
           </p>
           <h4 class="text-center"><a href="/item/{{ destiny.id }}">Подробнее</a><h4> 
+          {% if is_admin and destiny.inventorized %}
+          <br>
+          <div class="alert alert-success">
+            <center>
+              <strong>Инвенторизация выполнена</strong>
+            </center>
+          </div>
+          {% endif %}
         </div>
       </div>
       {% endfor %}

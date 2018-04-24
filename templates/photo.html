@@ -161,7 +161,12 @@
             </select>
           </div>
           <button type="button" class="btn btn-default btn-xs place-add">+</button>
-
+          <br>
+          <br>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="inventorized" {% if destiny.inventorized %} checked {% endif %}>
+            <label class="form-check-label" for="exampleCheck1">Инвентаризация выполнена</label>
+          </div>
           {% endif %}
           <br>
           <br>
@@ -183,6 +188,14 @@
 
           {% else %}
           <a href="?edit=1" class="btn btn-primary btn-block">Редактировать</a>
+          {% endif %}
+          {% if is_admin and destiny.inventorized %} 
+          <br>
+          <div class="alert alert-success">
+            <center>
+              <strong>Инвенторизация выполнена</strong>
+            </center>
+          </div>
           {% endif %}
           <br>
           {% endif %}

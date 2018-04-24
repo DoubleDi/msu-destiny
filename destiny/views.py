@@ -241,6 +241,7 @@ def edit_object(request, id):
         date = request.POST.get('date', False)
         text = request.POST.get('text', False)
         tabular = request.POST.get('tabular', False)
+        inventorized = True if request.POST.get('inventorized', False) else False
 
         try:
             author_name = request.POST.get('author', False)
@@ -272,6 +273,7 @@ def edit_object(request, id):
             destiny.place = place
         if tabular != False:
             destiny.tabular = tabular
+        destiny.inventorized = inventorized
 
         destiny.save()
         return HttpResponseRedirect('/item/'+id+'/')
@@ -302,6 +304,7 @@ def create_object(request):
         text = request.POST.get('text', False)
         date = request.POST.get('date', False)
         tabular = request.POST.get('tabular', False)
+        inventorized = True if request.POST.get('inventorized', False) else False
 
         try:
             author_name = request.POST.get('author', False)
@@ -335,6 +338,7 @@ def create_object(request):
             params['place'] = place
         if tabular != False:
             params['tabular'] = tabular
+        params['inventorized'] = inventorized
 
         destiny_object = DestinyObject.objects.create(**params)
 

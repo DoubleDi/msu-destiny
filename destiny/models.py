@@ -92,6 +92,8 @@ class DestinyObject(models.Model):
     date = models.CharField(max_length=50, verbose_name="Год", blank=True, null=True)
     place = models.ForeignKey("Place", verbose_name="Место нахождения", blank=True, null=True)
     tabular = models.CharField(max_length=50, verbose_name="Инвентарный номер", blank=True, null=True)
+    inventorized = models.BooleanField(
+        default=False, null=False, blank=False, verbose_name="Инвентаризация выполнена")
 
     class Meta:
         verbose_name = "Карточка"
