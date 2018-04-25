@@ -54,6 +54,7 @@ def main_page(request):
             'sort': params.get('sort', ''),
             'extra': params.get('extra', ''),
             'tabular': params.get('tabular', ''),
+            'inventorized': True if params.get('inventorized', False) else False
         }
         
         PAGE_COUNT = 50
@@ -76,6 +77,8 @@ def main_page(request):
             query &= Q(info__icontains=input_params['extra'].lower())
         if (input_params['tabular']):
             query &= Q(tabular__icontains=input_params['tabular'].lower())
+        if (input_params['inventorized']):
+            query &= Q(inventorized=input_params['inventorized'])
 
         all = DestinyObject.objects.filter(query)
         if input_params['sort'] == 'desc':
@@ -83,31 +86,27 @@ def main_page(request):
         else:
             all = all.order_by('name')
         
-        all = list(all)
-        
-
-        count_all = len(all)
-        
-
         destiny_objects = all[(
             (page - 1) * PAGE_COUNT) : ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1)]
 
-        if len(destiny_objects) < PAGE_COUNT:
+        if destiny_objects.count() < PAGE_COUNT:
             last_page = 1
-            destiny_objects = list(destiny_objects)
         else:
-            destiny_objects.pop()
+            destiny_objects[:destiny_objects.count() - 1]
+
+        destiny_objects = list(destiny_objects)
+
+        pictures = list(PhotoItem.objects.filter(photo_item__in = destiny_objects))
+        # optimize_pictures(pictures)
+        picture_dict = { x.photo_item : x for x in pictures }
 
         for destiny in destiny_objects:
-            pictures = PhotoItem.objects.filter(photo_item = destiny)
-
-            # optimize_pictures(pictures)
-            if len(pictures):
-                destiny.picture = pictures[0]
+            destiny.picture = picture_dict.get(destiny, '')
         
         types = ObjectType.objects.all()
         faculties = Place.objects.all()
 
+        count_all = all.count()
         return render(request, 'main.html', { 
             'page': page, 
             'first_page': page == 1,
@@ -202,19 +201,22 @@ def logout(request):
 def optimize_pictures(pictures):
     for p in pictures:
         path = MEDIA_ROOT + p.photo.name
-        if os.path.getsize(path) > 1024 * 1024:
-
-            logger.warning("Optimizing image {} {} {} {}".format(
-                path, MEDIA_ROOT, p.photo.name, os.path.getsize(path)))
-            
-            image = Image.open(path)
-            k = 1024.0 / max(image.size)
-            image = image.resize(
-                (int(image.size[0] * k), int(image.size[1] * k)), Image.ANTIALIAS)
-            image.save(path, optimize=True, quality=80)
-            
-            logger.warning("Optimized image {} {} {} {}".format(
-                path, MEDIA_ROOT, p.photo.name, os.path.getsize(path)))
+        try:
+            if os.path.getsize(path) > 1024 * 512:
+        
+                logger.warning("Optimizing image {} {} {} {}".format(
+                    path, MEDIA_ROOT, p.photo.name, os.path.getsize(path)))
+        
+                image = Image.open(path)
+                k = 512.0 / max(image.size)
+                image = image.resize(
+                    (int(image.size[0] * k), int(image.size[1] * k)), Image.ANTIALIAS)
+                image.save(path, optimize=True, quality=80)
+                
+                logger.warning("Optimized image {} {} {} {}".format(
+                    path, MEDIA_ROOT, p.photo.name, os.path.getsize(path)))
+        except Exception as e:
+            pass
 
 
 def handle_uploaded_file(f, path):

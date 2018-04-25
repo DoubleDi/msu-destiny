@@ -73,6 +73,10 @@
             <label class="control-label" for="inputYear">Год</label>
             <input type="text" name="year" value="{{ placeholders.year }}" class="form-control search-query">
             <br>
+            <input type="checkbox" class="form-check-input" name="inventorized" {% if placeholders.inventorized %} checked {% endif %}>
+            <label class="text-center form-check-label" for="exampleCheck1">Инвентаризация выполнена</label>
+            <br>
+            <br>
             {% if is_admin %}
             <a href="/item/create" class="btn btn-block btn-default">Создать</a>
             {% endif %}
@@ -162,7 +166,7 @@
           <br>
           <div class="alert alert-success">
             <center>
-              <strong>Инвенторизация выполнена</strong>
+              <strong>Инвентаризация выполнена</strong>
             </center>
           </div>
           {% endif %}
