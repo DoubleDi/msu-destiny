@@ -24,6 +24,8 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from msu_destiny.settings import BASE_DIR, MEDIA_ROOT, STATIC_ROOT
 from random import randint
+import json
+
 
 logger = logging.getLogger('django')
 
@@ -36,6 +38,9 @@ def auth_page(request):
             # return render(request, 'auth.html', params)
         else:
             return render(request, 'auth.html', params)
+
+def is_true(value):
+    return bool(value) and value.lower() not in ('false', '0')
 
 
 @login_required(login_url='/auth')
@@ -54,8 +59,11 @@ def main_page(request):
             'sort': params.get('sort', ''),
             'extra': params.get('extra', ''),
             'tabular': params.get('tabular', ''),
-            'inventorized': True if params.get('inventorized', False) else False
+            'inventorized': params.get('inventorized', ''),
         }
+
+        if not input_params['inventorized'] == '':
+            input_params['inventorized'] = is_true(input_params['inventorized'])
         
         PAGE_COUNT = 50
         last_page = 0
@@ -77,7 +85,7 @@ def main_page(request):
             query &= Q(info__icontains=input_params['extra'].lower())
         if (input_params['tabular']):
             query &= Q(tabular__icontains=input_params['tabular'].lower())
-        if (input_params['inventorized']):
+        if (input_params['inventorized'] != ''):
             query &= Q(inventorized=input_params['inventorized'])
 
         all = DestinyObject.objects.filter(query)

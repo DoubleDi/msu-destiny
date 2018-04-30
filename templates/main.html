@@ -72,10 +72,24 @@
             <input type="text" name="author" value="{{ placeholders.author }}"  class="form-control search-query" type="text" >
             <label class="control-label" for="inputYear">Год</label>
             <input type="text" name="year" value="{{ placeholders.year }}" class="form-control search-query">
-            <br>
-            <input type="checkbox" class="form-check-input" name="inventorized" {% if placeholders.inventorized %} checked {% endif %}>
-            <label class="text-center form-check-label" for="exampleCheck1">Инвентаризация выполнена</label>
-            <br>
+            <label class="control-label" for="inputInv">Инвентаризация</label>
+            <select name="inventorized" class="form-control btn dropdown-toggle btn-block">
+              {% if placeholders.inventorized == '' %}
+              <option selected="selected" value="">Не важно</option>
+              {% else %}
+              <option value="">Не важно</option>
+              {% endif %} 
+              {% if placeholders.inventorized == True %}
+              <option selected="selected" value="true">Да</option>
+              {% else %}
+              <option value="true">Да</option>
+              {% endif %} 
+              {% if placeholders.inventorized == False %}
+              <option selected="selected" value="false">Нет</option>
+              {% else %}
+              <option value="false">Нет</option>
+              {% endif %} 
+            </select>
             <br>
             {% if is_admin %}
             <a href="/item/create" class="btn btn-block btn-default">Создать</a>
