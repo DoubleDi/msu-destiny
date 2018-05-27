@@ -130,6 +130,7 @@ def main_page(request):
 
 @login_required(login_url='/auth')
 def serve_image(request, uri):
+    uri = uri.encode('utf-8')
     if not os.path.exists(os.path.join(MEDIA_ROOT, uri)):
         raise Http404("Изображения не существует")
         
