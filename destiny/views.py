@@ -12,7 +12,7 @@ sys.setdefaultencoding('utf8')
 
 from PIL import Image
 
-from destiny.models import Author, DestinyObject, ObjectType, PhotoItem, Place
+from destiny.models import Author, DestinyObject, ObjectType, PhotoItem, Place, Mol 
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -25,6 +25,7 @@ from django.template.loader import render_to_string
 from msu_destiny.settings import BASE_DIR, MEDIA_ROOT, STATIC_ROOT
 from random import randint
 import json
+import xlsxwriter
 
 
 logger = logging.getLogger('django')
@@ -60,6 +61,8 @@ def main_page(request):
             'extra': params.get('extra', ''),
             'tabular': params.get('tabular', ''),
             'inventorized': params.get('inventorized', ''),
+            'mol': params.get('mol', ''),
+            'export': params.get('export', ''),
         }
 
         if not input_params['inventorized'] == '':
@@ -87,15 +90,21 @@ def main_page(request):
             query &= Q(tabular__icontains=input_params['tabular'].lower())
         if (input_params['inventorized'] != ''):
             query &= Q(inventorized=input_params['inventorized'])
+        if (input_params['mol'] != ''):
+            query &= Q(mol__name__icontains=input_params['mol'].lower())
+
 
         all = DestinyObject.objects.filter(query)
         if input_params['sort'] == 'desc':
             all = all.order_by('-name')
         else:
             all = all.order_by('name')
-        
-        destiny_objects = all[(
-            (page - 1) * PAGE_COUNT) : ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1)]
+	
+        if input_params['export']:
+            destiny_objects = all
+        else:
+            destiny_objects = all[(
+                (page - 1) * PAGE_COUNT) : ((page - 1) * PAGE_COUNT + PAGE_COUNT + 1)]
 
         if destiny_objects.count() < PAGE_COUNT:
             last_page = 1
@@ -111,10 +120,53 @@ def main_page(request):
         for destiny in destiny_objects:
             destiny.picture = picture_dict.get(destiny, '')
         
-        types = ObjectType.objects.all()
-        faculties = Place.objects.all()
+        types = ObjectType.objects.all().order_by('name')
+        faculties = Place.objects.all().order_by('name')
+        mols = Mol.objects.all().order_by('name')
 
         count_all = all.count()
+	if input_params['export']:
+            workbook = xlsxwriter.Workbook('data.xlsx')
+            worksheet = workbook.add_worksheet()
+            worksheet.write(0, 0,"№")
+            worksheet.write(0, 1, "Автор") 
+            worksheet.write(0, 2, "Название")
+            worksheet.write(0, 3, "Тип")
+            worksheet.write(0, 4, "Подразделение")
+            worksheet.write(0, 5, "Инв №")
+            worksheet.write(0, 6, "Год")
+            worksheet.write(0, 7, "МОЛ")
+            worksheet.write(0, 8, "Прочее")
+	    index = 1
+
+            for do in destiny_objects:
+                worksheet.write(index, 0, index)
+                worksheet.write(index, 1, do.author.name if do.author else '') 
+                worksheet.write(index, 2, do.name)
+                worksheet.write(index, 3, do.object_type.name if do.object_type else '')
+                worksheet.write(index, 4, do.place.name if do.place else '')
+                worksheet.write(index, 5, do.tabular)
+                worksheet.write(index, 6, do.date)
+                worksheet.write(index, 7, do.mol.name if do.mol else '')
+                worksheet.write(index, 8, '\r\n'.join(do.info.split('\n')) if do.info else '')
+                index += 1
+                
+            worksheet.set_column(0, 0, 6)
+            worksheet.set_column(1, 1, 20)
+            worksheet.set_column(2, 2, 20)
+            worksheet.set_column(3, 3, 15)
+            worksheet.set_column(4, 4, 25)
+            worksheet.set_column(5, 5, 15)
+            worksheet.set_column(6, 6, 8)
+            worksheet.set_column(7, 7, 25)
+            worksheet.set_column(8, 8, 50)
+           
+            workbook.close()
+ 
+            with open('data.xlsx'.decode(), 'r+') as fh:	
+                response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+                response['Content-Disposition'] = 'inline; filename=data.xlsx'
+                return response
         return render(request, 'main.html', { 
             'page': page, 
             'first_page': page == 1,
@@ -124,7 +176,8 @@ def main_page(request):
             'faculties': faculties,
             'count': count_all,
             'placeholders': input_params,
-            'is_admin': request.user.is_staff
+            'is_admin': request.user.is_staff,
+            'mols': mols,
         })
 
 
@@ -172,6 +225,7 @@ def photo_page(request, id):
             'authors': Author.objects.all().order_by('name'),
             'types': ObjectType.objects.all().order_by('name'),
             'places': Place.objects.all().order_by('name'),
+            'mols': Mol.objects.all().order_by('name'),
         })
 
 
@@ -269,6 +323,12 @@ def edit_object(request, id):
             object_type = ObjectType.objects.get(name=object_type_name)
         except Exception as e:
             object_type = ObjectType.objects.create(name=object_type_name)
+        try:
+            mol_name = request.POST.get('mol', False)
+            mol = Mol.objects.get(name=mol_name)
+        except Exception as e: 
+            mol = False if mol_name == False else Mol.objects.create(name=mol_name) 
+
 
         if name != False:
             destiny.name = name
@@ -284,6 +344,8 @@ def edit_object(request, id):
             destiny.place = place
         if tabular != False:
             destiny.tabular = tabular
+        if mol != False:
+            destiny.mol = mol
         destiny.inventorized = inventorized
 
         destiny.save()
@@ -301,6 +363,7 @@ def create_page(request):
         'authors': Author.objects.all().order_by('name'),
         'types': ObjectType.objects.all().order_by('name'),
         'places': Place.objects.all().order_by('name'),
+        'mols': Mol.objects.all().order_by('name'),
     })
 
 
@@ -321,18 +384,22 @@ def create_object(request):
             author_name = request.POST.get('author', False)
             author = Author.objects.get(name=author_name)
         except Exception as e:
-            author = Author.objects.create(name=author_name)
+            author = False if not author_name else Author.objects.create(name=author_name)
         try:
             place_name = request.POST.get('place', False)
             place = Place.objects.get(name=place_name)
         except Exception as e:
-            place = Place.objects.create(name=place_name)
+            place = False if not place_name else Place.objects.create(name=place_name)
         try:
             object_type_name = request.POST.get('object_type', False)
             object_type = ObjectType.objects.get(name=object_type_name)
         except Exception as e:
-            object_type = ObjectType.objects.create(name=object_type_name)
-
+            object_type = False if not object_type_name else ObjectType.objects.create(name=object_type_name)
+        try:
+            mol_name = request.POST.get('mol', False)
+            mol = Mol.objects.get(name=mol_name)
+        except Exception as e: 
+            mol = False if not mol_name else Mol.objects.create(name=mol_name) 
 
         params = {}
         if name != False:
@@ -349,6 +416,8 @@ def create_object(request):
             params['place'] = place
         if tabular != False:
             params['tabular'] = tabular
+        if mol != False:
+            params['mol'] = mol
         params['inventorized'] = inventorized
 
         destiny_object = DestinyObject.objects.create(**params)

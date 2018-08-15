@@ -85,7 +85,7 @@ logger = logging.getLogger('django')
 
 
 class DestinyObject(models.Model):
-    name = models.CharField(max_length = 50, verbose_name = "Название Обьекта")
+    name = models.CharField(max_length = 200, verbose_name = "Название Обьекта")
     author = models.ForeignKey("Author", verbose_name="Автор", blank=True, null=True)
     info = models.TextField("Информация", blank = True, null = True)
     object_type = models.ForeignKey("ObjectType", verbose_name="Тип обьекта", blank = True, null = True)
@@ -94,6 +94,7 @@ class DestinyObject(models.Model):
     tabular = models.CharField(max_length=50, verbose_name="Инвентарный номер", blank=True, null=True)
     inventorized = models.BooleanField(
         default=False, null=False, blank=False, verbose_name="Инвентаризация выполнена")
+    mol = models.ForeignKey("Mol", verbose_name="Материально ответсвенное лицо", blank=True, null=True)
 
     class Meta:
         verbose_name = "Карточка"
@@ -147,6 +148,16 @@ class Author(models.Model):
     class Meta:
         verbose_name = "Автор"
         verbose_name_plural = "Авторы"
+
+    def __unicode__(self):
+        return self.name
+
+class Mol(models.Model):
+    name = models.CharField(max_length=150, verbose_name="Материально ответственное лицо")
+
+    class Meta:
+        verbose_name = "МОЛ"
+        verbose_name_plural = "МОЛ"
 
     def __unicode__(self):
         return self.name

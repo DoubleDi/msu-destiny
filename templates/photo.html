@@ -93,11 +93,6 @@
           <div class="author-box">
             <label class="control-label" for="inputType">Автор</label>
             <select name="author" class="form-control btn dropdown-toggle btn-block">
-              {% if destiny.author %}
-              <option value="">Любой</option>
-              {% else %}
-              <option selected="selected" value="">Любой</option>
-              {% endif %} 
               {% for a in authors %} 
               {% if a.name == destiny.author.name %}
               <option selected="selected" value="{{ a.name }}">{{ a.name }}</option>
@@ -117,11 +112,6 @@
           <div class="type-box">
             <label class="control-label" for="inputType">Тип</label>
             <select name="object_type" class="form-control btn dropdown-toggle btn-block">
-              {% if destiny.object_type.name %}
-              <option value="">Любой</option>
-              {% else %}
-              <option selected="selected" value="">Любой</option>
-              {% endif %} 
               {% for t in types %} 
               {% if t.name == destiny.object_type.name %}
               <option selected="selected" value="{{ t.name }}">{{ t.name }}</option>
@@ -140,17 +130,12 @@
 
           <div>
             <label class="control-label" for="inputTabular">Инвентарный номер</label>
-            <input type="text" name="tabular" value="{{ destiny.tabular|default:"" }}" class="form-control search-query">
+            <input type="text" id="tbl" name="tabular" value="{{ destiny.tabular|default:"" }}" class="form-control search-query">
           </div>
           
           <div class="place-box">
             <label class="control-label" for="inputType">Подразделение</label>
             <select name="place" class="form-control btn dropdown-toggle btn-block">
-              {% if destiny.place.name %}
-              <option value="">Любое</option>
-              {% else %}
-              <option selected="selected" value="">Любое</option>
-              {% endif %} 
               {% for p in places %} 
               {% if p.name == destiny.place.name %}
               <option selected="selected" value="{{ p.name }}">{{ p.name }}</option>
@@ -161,11 +146,26 @@
             </select>
           </div>
           <button type="button" class="btn btn-default btn-xs place-add">+</button>
+          
+           <div class="mol-box">
+            <label class="control-label" for="inputType">МОЛ</label>
+            <select name="mol" class="form-control btn dropdown-toggle btn-block">
+              {% for m in mols %} 
+              {% if m.name == destiny.mol.name %}
+              <option selected="selected" value="{{ m.name }}">{{ m.name }}</option>
+              {% else %}
+              <option value="{{ m.name }}">{{ m.name }}</option>
+              {% endif %} 
+              {% endfor %}
+            </select>
+          </div>
+          <button type="button" class="btn btn-default btn-xs mol-add">+</button>
+          
           <br>
           <br>
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="inventorized" {% if destiny.inventorized %} checked {% endif %}>
-            <label class="form-check-label" for="exampleCheck1">Инвентаризация выполнена</label>
+            <input type="checkbox" id="inv-btn" class="form-check-input" name="inventorized" {% if destiny.inventorized %} checked {% endif %}>
+            <label class="form-check-label" for="inv-btn">Инвентаризация выполнена</label>
           </div>
           {% endif %}
           <br>
@@ -183,7 +183,7 @@
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           {% if is_admin %}
           {% if edit %}
-          <input type="submit" class="btn btn-success btn-block" value="Сохранить" />
+          <input type="submit" id="save-btn"class="btn btn-success btn-block" value="Сохранить" />
          {% comment %}<a href="/item/{{ destiny.id }}/delete_object" class="btn btn-danger btn-block">Удалить</a> {% endcomment %}
 
           {% else %}
@@ -205,6 +205,7 @@
             {% if destiny.object_type.name %}<h5><strong>Тип: </strong>{{ destiny.object_type.name }}</h5> {% endif %}
             {% if destiny.date %} <h5><strong>Год: </strong>{{ destiny.date }}</h5> {% endif %}
             {% if destiny.tabular %} <h5><strong>Инв. Номер: </strong>{{ destiny.tabular }}</h5> {% endif %}
+            {% if destiny.mol %} <h5><strong>МОЛ: </strong>{{ destiny.mol }}</h5> {% endif %}
           </div>
           {% endif %}
         </div><!-- /.blog-sidebar -->
@@ -215,7 +216,7 @@
 
     <footer class="blog-footer">
       <p>
-        <a href="#">Наверх</a>
+        <a href="{{ request.META.HTTP_REFERER }}">Назад</a>
       </p>
     </footer>
 
@@ -239,6 +240,10 @@
           $(".place-add").click(function () {
             $(".place-box").html('<label class="control-label" for="inputType">Подразделение</label>\n<input type="text" name="place" class="form-control search-query">')
           });
+          $(".mol-add").click(function () {
+            $(".mol-box").html('<label class="control-label" for="inputType">МОЛ</label>\n<input type="text" name="mol" class="form-control search-query">')
+          });
+ 
         });
     </script>
   </body>

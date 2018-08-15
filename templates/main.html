@@ -93,16 +93,16 @@
             <br>
             {% if is_admin %}
             <a href="/item/create" class="btn btn-block btn-default">Создать</a>
+            <br>
+            <div class="form-check">
+                <input type="checkbox" id="export-btn" class="form-check-input" name="export">
+                <label class="form-check-label" for="export-btn">Экспорт</label>
+            </div> 
             {% endif %}
           </div>
           <div class="col-sm-6">
             <label class="control-label" for="inputType">Тип</label>
             <select name="type" class="form-control btn dropdown-toggle btn-block">
-              {% if placeholders.type %}
-              <option value="">Любой</option>
-              {% else %}
-              <option selected="selected" value="">Любой</option>
-              {% endif %}
               {% for t in types %}
               {% if t.name == placeholders.type %}
               <option selected="selected" value="{{ t.name }}">{{ t.name }}</option>
@@ -115,11 +115,6 @@
             <!--<input type="text" class="form-control search-query"> -->
             <label class="control-label" for="inputFaculty">Подразделение</label>
             <select name="place" class="form-control btn dropdown-toggle btn-block">
-              {% if placeholders.place %}
-              <option value="">Любое</option>
-              {% else %}
-              <option selected="selected" value="">Любое</option>
-              {% endif %}
               {% for f in faculties %}
               {% if f.name == placeholders.place %}
               <option selected="selected" value="{{ f.name }}">{{ f.name }}</option>
@@ -128,6 +123,18 @@
               {% endif %}
               {% endfor %}
             </select>
+
+            <label class="control-label" for="inputMol">МОЛ</label>
+            <select name="mol" class="form-control btn dropdown-toggle btn-block">
+              {% for m in mols %}
+              {% if m.name == placeholders.mol %}
+              <option selected="selected" value="{{ m.name }}">{{ m.name }}</option>
+              {% else %}
+              <option value="{{ m.name }}">{{ m.name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+
 
             <!-- <label class="control-label" for="inputFaculty">Сортировка</label>
             <select name="sort" class="form-control btn dropdown-toggle btn-block">
@@ -175,7 +182,7 @@
             {% if destiny.date %} {{ destiny.date }}, {% endif %} 
             {% if destiny.place.name %} {{ destiny.place.name }} {% endif %}
           </p>
-          <h4 class="text-center"><a href="/item/{{ destiny.id }}">Подробнее</a><h4> 
+          <h4 class="text-center"><a href="/item/{{ destiny.id }}/">Подробнее</a><h4> 
           {% if is_admin and destiny.inventorized %}
           <br>
           <div class="alert alert-success">

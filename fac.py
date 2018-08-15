@@ -5,13 +5,19 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "msu_destiny.settings")
 django.setup()
 import re
-from destiny.models import DestinyObject, PhotoItem, ObjectType, Place, Author
+from destiny.models import ObjectType, DestinyObject, PhotoItem, ObjectType, Place, Author, Mol
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
-with open('all.txt', 'r') as f:
-    all = f.readlines()
+do = DestinyObject.objects.filter(info__icontains='инв')
 
-for name in all:
-    Place.objects.create(
-        name=name  # Название факультета
-    )
-    
+import re 
+
+for d in do:
+    n = re.search('Инв.*?(\d+)', d.info.encode('utf8'), flags=re.IGNORECASE)
+    if n:
+        print n.group(1)
+    if not d.tabular and n:
+        d.tabular = n.group(1)
+        d.save()

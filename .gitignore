@@ -11,3 +11,5 @@ nohup.out
 destiny/migrations/*
 media/*
 *.sql
+*.xlsx
+*.csv

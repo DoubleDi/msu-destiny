@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from destiny.models import Author, DestinyObject, ObjectType, PhotoItem, Place
+from destiny.models import Author, DestinyObject, ObjectType, PhotoItem, Place, Mol
 from django.contrib import admin
 
 
@@ -95,6 +95,7 @@ admin.site.register(ObjectType, ObjectTypeAdmin)
 admin.site.register(PhotoItem, PhotoItemAdmin)
 admin.site.register(Place, PlaceAdmin)
 # admin.site.register(Profile)
+admin.site.register(Mol)
 
 
 
